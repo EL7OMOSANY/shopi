@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
-
-import 'package:shopi/core/extensions/extension.dart';
-
+import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_button.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_form_fields.dart';
 import 'package:shopi/fetures/auth/widgets/check_account.dart';

@@ -44,9 +44,7 @@ class AppRouter {
             textAlign: TextAlign.center,
           ),
         ),
-        appBar: AppBar(
-          title: const Text('Error'),
-        ),
+        appBar: AppBar(title: const Text('Error')),
       ),
       settings: settings,
     );

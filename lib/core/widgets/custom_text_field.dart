@@ -1,7 +1,7 @@
-import 'package:shopi/core/constants/app_text_styles.dart';
-import 'package:shopi/core/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopi/core/constants/app_text_styles.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -43,11 +43,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: context.color.white,
+      cursorColor: context.color.textColor,
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        color: context.color.white,
+        color: context.color.textColor,
       ),
       validator: (value) {
         return validator!(value);
@@ -61,11 +61,11 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: context.color.buttonLight),
+          borderSide: BorderSide(color: context.color.textFormBorder!),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: context.color.border),
+          borderSide: BorderSide(color: context.color.textFormBorder!),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -86,7 +86,7 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle:
             hintStyle ??
-            AppTextStyles.text16w400.copyWith(color: context.color.white),
+            AppTextStyles.text14w400.copyWith(color: context.color.textColor),
         errorStyle: AppTextStyles.text14w400.copyWith(color: Colors.red),
       ),
     );

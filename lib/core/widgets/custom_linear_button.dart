@@ -1,6 +1,6 @@
-import 'package:shopi/core/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 
 class CustomLinearButton extends StatelessWidget {
   const CustomLinearButton({
@@ -18,7 +18,7 @@ class CustomLinearButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: context.color.blueLight,
+      splashColor: context.color.bluePinkLight!.withOpacity(0.3),
       onTap: onPressed,
       child: Container(
         height: height ?? 44.h,
@@ -28,7 +28,10 @@ class CustomLinearButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           gradient: LinearGradient(
-            colors: [context.color.buttonLight, context.color.buttonDark],
+            colors: [
+              context.color.bluePinkLight!,
+              context.color.bluePinkDark!,
+            ],
             begin: const Alignment(0.46, -0.89),
             end: const Alignment(-0.46, 0.89),
           ),

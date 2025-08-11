@@ -1,5 +1,5 @@
 import 'package:shopi/core/constants/app_spacer.dart';
-import 'package:shopi/core/extensions/extension.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/fetures/auth/login/presentaion/widgets/sign_in_form_fields.dart';
@@ -30,13 +30,12 @@ class LoginScreen extends StatelessWidget {
                 SignInFormFields(),
                 AppSpacing.v24,
                 SignInButton(),
-
                 AppSpacing.v24,
                 CheckAccount(
                   text: "Don't have an account?",
                   buttonText: "Sign Up",
                   onPressed: () {
-                    context.pushNamed(Routes.register);
+                    context.pushName(Routes.register);
                   },
                 ),
               ],
