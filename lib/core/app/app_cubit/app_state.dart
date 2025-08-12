@@ -1,10 +1,8 @@
-part of 'app_cubit.dart';
+abstract class AppState {}
 
-@freezed
-class AppState with _$AppState {
-  const factory AppState.initial() = _Initial;
-  const factory AppState.themeChangeMode({required bool isDark}) =
-      ThemeChangeModeState;
-  // const factory AppState.languageChange({required Locale locale}) =
-  //     LanguageChangeState;
+class AppInitialState extends AppState {}
+
+class AppThemeChangeed extends AppState {
+  final bool sharedTheme;
+  AppThemeChangeed({required this.sharedTheme});
 }

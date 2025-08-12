@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_button.dart';
@@ -22,7 +23,10 @@ class SignupScreen extends StatelessWidget {
               children: [
                 LangAndThemeRow(),
                 AppSpacing.v24,
-                CircleAvatar(radius: 50.r),
+                CustomFadeInUp(
+                  duration: 500,
+                  child: CircleAvatar(radius: 50.r),
+                ),
                 AppSpacing.v24,
                 HeadAndCaptionColumn(
                   head: "Sign Up",
@@ -34,12 +38,15 @@ class SignupScreen extends StatelessWidget {
                 SignupButton(),
 
                 AppSpacing.v24,
-                CheckAccount(
-                  text: 'Already have an account?',
-                  buttonText: 'Sign In',
-                  onPressed: () {
-                    context.pop();
-                  },
+                CustomFadeInUp(
+                  duration: 700,
+                  child: CheckAccount(
+                    text: 'Already have an account?',
+                    buttonText: 'Sign In',
+                    onPressed: () {
+                      context.pop();
+                    },
+                  ),
                 ),
               ],
             ),

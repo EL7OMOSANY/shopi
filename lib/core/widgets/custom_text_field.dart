@@ -86,7 +86,9 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle:
             hintStyle ??
-            AppTextStyles.text14w400.copyWith(color: context.color.textColor),
+            AppTextStyles.text14w400.copyWith(
+              color: context.color.textFormBorder,
+            ),
         errorStyle: AppTextStyles.text14w400.copyWith(color: Colors.red),
       ),
     );

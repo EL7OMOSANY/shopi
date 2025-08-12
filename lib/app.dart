@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
+import 'package:shopi/core/app/app_cubit/app_state.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
@@ -16,8 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AppCubit>()
-        ..changeAppThemeMode(
-          sharedMode: SharedPref().getBoolean(SharedPrefKeys.isDark),
+        ..changeAppTheme(
+          sharedTheme: SharedPref().getBoolean(SharedPrefKeys.isDark) ?? false,
         ),
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
               final cubit = context.read<AppCubit>();
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                theme: cubit.isDark ? themeLight() : themeDark(),
+                theme: cubit.isDark ? themeDark() : themeLight(),
                 themeMode: ThemeMode.system,
                 onGenerateRoute: AppRouter.onGenerateRoute,
                 initialRoute: Routes.login,
