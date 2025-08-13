@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
@@ -6,13 +5,14 @@ import 'package:shopi/core/app/app_cubit/app_state.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
+import 'package:shopi/core/langs/app_localizations_setup.dart';
 import 'package:shopi/core/routes/app_route.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/style/themes/app_theme.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Shopi extends StatelessWidget {
+  const Shopi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,12 @@ class MyApp extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<AppCubit>();
               return MaterialApp(
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
+                localizationsDelegates:
+                    AppLocalizationsSetup.localizationsDelegates,
+                supportedLocales: AppLocalizationsSetup.supportedLocales,
+                locale: Locale(cubit.currentLang),
                 debugShowCheckedModeBanner: false,
-                theme: cubit.isDark ? themeDark() : themeLight(),
-                themeMode: ThemeMode.system,
+                theme: cubit.isDark ? themeLight() : themeDark(),
                 onGenerateRoute: AppRouter.onGenerateRoute,
                 initialRoute: Routes.login,
               );

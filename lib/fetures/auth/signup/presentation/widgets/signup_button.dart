@@ -1,9 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
-import 'package:shopi/core/constants/lang_keys.dart';
+import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/widgets/custom_linear_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
@@ -20,7 +19,7 @@ class SignupButton extends StatelessWidget {
         height: 50.h,
         onPressed: () {},
         child: TextApp(
-          text: (LangKeys.signUp.tr()),
+          text: context.tr(LangKeys.signUp),
           style: AppTextStyles.text16w700.copyWith(
             color: context.color.mainColor,
           ),

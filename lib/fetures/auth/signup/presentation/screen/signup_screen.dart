@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
-import 'package:shopi/core/constants/lang_keys.dart';
+import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/prfile_image.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_button.dart';
@@ -28,8 +27,8 @@ class SignupScreen extends StatelessWidget {
                 ProfileImage(),
                 AppSpacing.v24,
                 HeadAndCaptionColumn(
-                  head:(LangKeys.signUp.tr()),
-                  caption: (LangKeys.createAccount.tr()),
+                  head:context.tr(LangKeys.signUp),
+                  caption: context.tr(LangKeys.signUpWelcome),
                 ),
                 AppSpacing.v24,
                 SignupFormFields(),
@@ -40,8 +39,8 @@ class SignupScreen extends StatelessWidget {
                 CustomFadeInUp(
                   duration: 700,
                   child: CheckAccount(
-                    text: (LangKeys.youHaveAccount.tr()),
-                    buttonText: (LangKeys.signIn.tr()),
+                    text: context.tr(LangKeys.youHaveAccount),
+                    buttonText: context.tr(LangKeys.signIn),
                     onPressed: () {
                       context.pop();
                     },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopi/core/extensions/assets_extension.dart';
 import 'package:shopi/core/extensions/color_extension.dart';
+import 'package:shopi/core/langs/app_localization.dart';
 
 extension ContextExt on BuildContext {
   //color
@@ -12,10 +13,10 @@ extension ContextExt on BuildContext {
   // style
   TextStyle get textStyle => Theme.of(this).textTheme.displaySmall!;
 
-  // //Language
-  // String translate(String langKey) {
-  //   return tr(langKey);
-  // }
+  //Language
+  String tr(String langkey) {
+    return AppLocalizations.of(this)!.translate(langkey).toString();
+  }
 
   //Navigation
 

@@ -37,8 +37,6 @@ dependencies:
   graphql_flutter: ^5.2.0
   hive_flutter: ^1.1.0
   dio: ^5.8.0+1
-
-
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.5.3
   flutter_secure_storage: ^9.2.4
@@ -54,7 +52,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   animate_do: ^4.2.0
   freezed: ^3.2.0
-  easy_localization: ^3.0.8
+  flutter_localization: ^0.3.3
 
 dev_dependencies:
   flutter_test:

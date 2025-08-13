@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_state.dart';
@@ -7,7 +6,7 @@ import 'package:shopi/core/helpers/shared_pref_helper.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitialState());
-  bool isDark = true;
+  bool isDark = false;
   String currentLang = 'en';
   //Theme Mode
   Future<void> changeAppTheme({bool? sharedTheme}) async {
@@ -25,7 +24,6 @@ class AppCubit extends Cubit<AppState> {
   }
   ///////////////////////////////////////////////////////////////////
 
-  //Language Change
   void getSavedLanguage() {
     final result =
         SharedPref().containPreference(SharedPrefKeys.currentLangCode)
@@ -37,37 +35,16 @@ class AppCubit extends Cubit<AppState> {
     emit(AppLanguageChangeed(sharedLanguage: Locale(currentLang)));
   }
 
-  // Future<void> _changeLang(BuildContext context, String langCode) async {
-  //   await SharedPref().setString(SharedPrefKeys.currentLangCode, langCode);
-  //   currentLang = langCode;
-
-  //   // ignore: use_build_context_synchronously
-  //   await context.setLocale(Locale(langCode));
-
-  //   if (!isClosed) {
-  //     emit(AppLanguageChangeed(sharedLanguage: Locale(currentLang)));
-  //   }
-  // }
-
-  // void toArabic(BuildContext context) => _changeLang(context, 'ar');
-  // void toEnglish(BuildContext context) => _changeLang(context, 'en');
-  // حفظ اللغة
-  Future<void> changeLanguage(BuildContext context, String langCode) async {
+  Future<void> _changeLang(String langCode) async {
     await SharedPref().setString(SharedPrefKeys.currentLangCode, langCode);
-
-    // تحديث EasyLocalization مباشرة
-    // ignore: use_build_context_synchronously
-    await context.setLocale(Locale(langCode));
-
     currentLang = langCode;
-
-    if (!isClosed) {
-      emit(AppLanguageChangeed(sharedLanguage: Locale(currentLang)));
-    }
+    emit(AppLanguageChangeed(sharedLanguage: Locale(currentLang)));
   }
 
-  void toArabic(BuildContext context) => changeLanguage(context, 'ar');
-  void toEnglish(BuildContext context) => changeLanguage(context, 'en');
+  void toArabic() => _changeLang('ar');
+
+  void toEnglish() => _changeLang('en');
+}
 
   ///////////////////////////////////////////////////////////////////////
-}
+

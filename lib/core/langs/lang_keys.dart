@@ -8,7 +8,7 @@ class LangKeys {
   static const String fieldIsRequired = 'field_is_required';
   static const String signIn = 'sign_in';
   static const String validEmail = 'valid_email';
-  static const String validPasswrod = 'valid_passwrod';
+  static const String validPassword = 'valid_passwrod';
   static const String loggedSuccessfully = 'logged_successfully';
   static const String loggedError = 'logged_error';
   static const String createAccount = 'create_account';

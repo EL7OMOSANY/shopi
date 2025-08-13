@@ -1,6 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
-import 'package:shopi/core/constants/lang_keys.dart';
+import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +24,8 @@ class LoginScreen extends StatelessWidget {
                 LangAndThemeRow(),
                 AppSpacing.v24,
                 HeadAndCaptionColumn(
-                  head: (LangKeys.signIn.tr()),
-                  caption: LangKeys.welcome.tr(),
+                  head: context.tr(LangKeys.signIn),
+                  caption: context.tr(LangKeys.welcome),
                 ),
                 AppSpacing.v24,
                 SignInFormFields(),
@@ -34,8 +33,8 @@ class LoginScreen extends StatelessWidget {
                 SignInButton(),
                 AppSpacing.v24,
                 CheckAccount(
-                  text: (LangKeys.youHaveAccount.tr()),
-                  buttonText: (LangKeys.signUp.tr()),
+                  text: context.tr(LangKeys.createAccount),
+                  buttonText: context.tr(LangKeys.signUp),
                   onPressed: () {
                     context.pushName(Routes.register);
                   },

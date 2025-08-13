@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
-import 'package:shopi/core/constants/lang_keys.dart';
+import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/utils/validators.dart';
 import 'package:shopi/core/widgets/custom_text_field.dart';
@@ -28,12 +27,12 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 500,
             child: CustomTextField(
-              hintText: (LangKeys.fullName.tr()),
+              hintText: context.tr(LangKeys.fullName),
               obscureText: true,
               validator: (value) {
                 return Validators.validateRequired(
                   value,
-                  (LangKeys.validName.tr()),
+                  context.tr(LangKeys.validName),
                 );
               },
 
@@ -44,12 +43,12 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 550,
             child: CustomTextField(
-              hintText: (LangKeys.email.tr()),
+              hintText: context.tr(LangKeys.email),
               controller: TextEditingController(),
               validator: (value) {
                 return Validators.validateEmail(
                   value,
-                  (LangKeys.validEmail.tr()),
+                  context.tr(LangKeys.validEmail),
                 );
               },
             ),
@@ -59,7 +58,7 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 600,
             child: CustomTextField(
-              hintText: (LangKeys.password.tr()),
+              hintText: context.tr(LangKeys.password),
               obscureText: isObscure,
               suffixIcon: IconButton(
                 onPressed: () {
@@ -73,7 +72,7 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
               validator: (value) {
                 return Validators.validatePassword(
                   value,
-                  (LangKeys.validPasswrod.tr()),
+                  context.tr(LangKeys.validPassword),
                 );
               },
               controller: TextEditingController(),
