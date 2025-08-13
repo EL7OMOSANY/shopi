@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       create: (context) => getIt<AppCubit>()
         ..changeAppTheme(
           sharedTheme: SharedPref().getBoolean(SharedPrefKeys.isDark) ?? false,
-        ),
+        )
+        ..getSavedLanguage(),
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
@@ -29,6 +31,9 @@ class MyApp extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<AppCubit>();
               return MaterialApp(
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
                 debugShowCheckedModeBanner: false,
                 theme: cubit.isDark ? themeDark() : themeLight(),
                 themeMode: ThemeMode.system,

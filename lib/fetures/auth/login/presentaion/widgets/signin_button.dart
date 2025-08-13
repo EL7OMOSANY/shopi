@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
+import 'package:shopi/core/constants/lang_keys.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/widgets/custom_linear_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 
@@ -16,7 +19,12 @@ class SignInButton extends StatelessWidget {
         width: double.infinity.w,
         height: 50.h,
         onPressed: () {},
-        child: TextApp(text: 'Login', style: AppTextStyles.text16w700),
+        child: TextApp(
+          text: (LangKeys.signIn.tr()),
+          style: AppTextStyles.text16w700.copyWith(
+            color: context.color.mainColor,
+          ),
+        ),
       ),
     );
   }

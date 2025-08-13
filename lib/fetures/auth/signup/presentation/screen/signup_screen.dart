@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
+import 'package:shopi/core/constants/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
+import 'package:shopi/fetures/auth/signup/presentation/widgets/prfile_image.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_button.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_form_fields.dart';
 import 'package:shopi/fetures/auth/widgets/check_account.dart';
@@ -17,20 +19,17 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: EdgeInsetsDirectional.symmetric(horizontal: 16, vertical: 24),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 LangAndThemeRow(),
                 AppSpacing.v24,
-                CustomFadeInUp(
-                  duration: 500,
-                  child: CircleAvatar(radius: 50.r),
-                ),
+                ProfileImage(),
                 AppSpacing.v24,
                 HeadAndCaptionColumn(
-                  head: "Sign Up",
-                  caption: "Create an account to continue",
+                  head:(LangKeys.signUp.tr()),
+                  caption: (LangKeys.createAccount.tr()),
                 ),
                 AppSpacing.v24,
                 SignupFormFields(),
@@ -41,8 +40,8 @@ class SignupScreen extends StatelessWidget {
                 CustomFadeInUp(
                   duration: 700,
                   child: CheckAccount(
-                    text: 'Already have an account?',
-                    buttonText: 'Sign In',
+                    text: (LangKeys.youHaveAccount.tr()),
+                    buttonText: (LangKeys.signIn.tr()),
                     onPressed: () {
                       context.pop();
                     },

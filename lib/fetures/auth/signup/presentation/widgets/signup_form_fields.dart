@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
+import 'package:shopi/core/constants/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/utils/validators.dart';
 import 'package:shopi/core/widgets/custom_text_field.dart';
@@ -26,12 +28,12 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 500,
             child: CustomTextField(
-              hintText: "Name",
+              hintText: (LangKeys.fullName.tr()),
               obscureText: true,
               validator: (value) {
                 return Validators.validateRequired(
                   value,
-                  "Password is required",
+                  (LangKeys.validName.tr()),
                 );
               },
 
@@ -42,10 +44,13 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 550,
             child: CustomTextField(
-              hintText: "Email",
+              hintText: (LangKeys.email.tr()),
               controller: TextEditingController(),
               validator: (value) {
-                return Validators.validateEmail(value, "Email is required");
+                return Validators.validateEmail(
+                  value,
+                  (LangKeys.validEmail.tr()),
+                );
               },
             ),
           ),
@@ -54,7 +59,7 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
           CustomFadeInUp(
             duration: 600,
             child: CustomTextField(
-              hintText: "Password",
+              hintText: (LangKeys.password.tr()),
               obscureText: isObscure,
               suffixIcon: IconButton(
                 onPressed: () {
@@ -68,7 +73,7 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
               validator: (value) {
                 return Validators.validatePassword(
                   value,
-                  "Password is required",
+                  (LangKeys.validPasswrod.tr()),
                 );
               },
               controller: TextEditingController(),

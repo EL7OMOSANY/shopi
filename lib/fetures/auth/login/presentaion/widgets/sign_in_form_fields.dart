@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
+import 'package:shopi/core/constants/lang_keys.dart';
 import 'package:shopi/core/utils/validators.dart';
 
 import '../../../../../core/constants/app_spacer.dart';
@@ -24,16 +26,16 @@ class _SignInFormFieldsState extends State<SignInFormFields> {
         child: Column(
           children: [
             CustomTextField(
-              hintText: "Email",
+              hintText: (LangKeys.email.tr()),
               hintStyle: AppTextStyles.text14w400,
               controller: TextEditingController(),
               validator: (value) {
-                return Validators.validateEmail(value, "Email is required");
+                return Validators.validateEmail(value, (LangKeys.validEmail.tr()));
               },
             ),
             AppSpacing.v24,
             CustomTextField(
-              hintText: "Password",
+              hintText:(LangKeys.password.tr()),
               hintStyle: AppTextStyles.text14w400,
               obscureText: isObscure,
               suffixIcon: IconButton(
@@ -46,7 +48,7 @@ class _SignInFormFieldsState extends State<SignInFormFields> {
                 icon: Icon(icon),
               ),
               validator: (value) {
-                return Validators.validatePassword(value, "Password is required");
+                return Validators.validatePassword(value,(LangKeys.validPasswrod.tr()));
               },
               controller: TextEditingController(),
             ),
