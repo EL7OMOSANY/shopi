@@ -39,7 +39,7 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_secure_storage: ^9.2.4
   flutter_bloc: ^9.1.1
-  cherry_toast: ^1.13.0
+  cherry_toast: ^1.13.0  
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.17
   smooth_page_indicator: ^1.2.0+3
@@ -48,10 +48,9 @@ dependencies:
   google_nav_bar: ^5.0.7
   firebase_core: ^4.0.0
   flutter_launcher_icons: ^0.14.4
-  animate_do: ^4.2.0
+  animate_do: ^3.1.2
   freezed: ^3.2.0
   flutter_localization: ^0.3.3
-  #APi
   dio: ^5.8.0+1
   retrofit: ^4.0.3
   pretty_dio_logger: ^1.4.0
@@ -65,7 +64,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   build_runner: ^2.6.0
   freezed_annotation: ^3.1.0
   retrofit_generator: ^10.0.2

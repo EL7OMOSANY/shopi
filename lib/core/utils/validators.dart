@@ -1,4 +1,3 @@
-
 class Validators {
   static final RegExp _emailRegex = RegExp(
     r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$',
@@ -7,10 +6,12 @@ class Validators {
   // Updated regex to support both Saudi and Egyptian formats
   static final RegExp _saudiPhoneRegex = RegExp(r'^((\+966|966|0)?5[0-9]{8})$');
   static final RegExp _egyptPhoneRegex = RegExp(r'^((\+20|20|0)?1[0-9]{9})$');
-
-  static final RegExp _passwordRegex = RegExp(
-    r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~`)\%\-(_+=\|}{\[/?,><.";\:|])[A-Za-z\d!@#\$&*~`)\%\-(_+=\|}{\[/?,><.";\:|]{8,}$',
-  );
+  // nums and letters and special characters
+  // static final RegExp _passwordRegex = RegExp(
+  //   r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~`)\%\-(_+=\|}{\[/?,><.";\:|])[A-Za-z\d!@#\$&*~`)\%\-(_+=\|}{\[/?,><.";\:|]{8,}$',
+  // );
+  //nums and letters only
+  static final RegExp _passwordRegex = RegExp(r'^[A-Za-z0-9]{8,}$');
 
   static final RegExp _usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
 
@@ -126,7 +127,7 @@ class Validators {
 
   static String? validatePassword(String? value, String errorMessage) {
     if (value == null || value.isEmpty) {
-      return 'login.password_required';
+      return errorMessage;
     }
     if (!_passwordRegex.hasMatch(value)) {
       return 'login.password_invalid';

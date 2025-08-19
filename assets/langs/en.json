@@ -33,5 +33,6 @@
     "dark_mode": "Dark Mode",
     "lang_code": "English",
     "field_is_required": "This field is required",
-    "sign_in": "Sign In"
+    "sign_in": "Sign In",
+    "loggedError": "There was an error logging in. Try again"
 }

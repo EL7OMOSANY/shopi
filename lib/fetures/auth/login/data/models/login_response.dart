@@ -6,21 +6,31 @@ part 'login_response.g.dart';
 class LoginResponse {
   final Data? data;
 
-  LoginResponse({required this.data});
+  LoginResponse({this.data});
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$LoginResponseFromJson(json);
+  factory LoginResponse.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      throw const FormatException('JSON is null');
+    }
+    return _$LoginResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }
 
 @JsonSerializable()
 class Data {
+  @JsonKey(name: 'login')
   final LoginData? loginData;
 
-  Data({required this.loginData});
+  Data({this.loginData});
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory Data.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      throw const FormatException('Data JSON is null');
+    }
+    return _$DataFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
 }
@@ -33,10 +43,14 @@ class LoginData {
   @JsonKey(name: 'refresh_token')
   final String? refreshToken;
 
-  LoginData({required this.accessToken, required this.refreshToken});
+  LoginData({this.accessToken, this.refreshToken});
 
-  factory LoginData.fromJson(Map<String, dynamic> json) =>
-      _$LoginDataFromJson(json);
+  factory LoginData.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      throw const FormatException('LoginData JSON is null');
+    }
+    return _$LoginDataFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$LoginDataToJson(this);
 }

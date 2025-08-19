@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/utils/validators.dart';
+import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dart';
 
 import '../../../../../core/constants/app_spacer.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -19,14 +21,16 @@ class _SignInFormFieldsState extends State<SignInFormFields> {
   IconData icon = Icons.visibility_off;
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return Form(
+      key: cubit.formKey,
       child: CustomFadeInUp(
         duration: 500,
         child: Column(
           children: [
             CustomTextField(
               hintText: context.tr(LangKeys.email),
-              controller: TextEditingController(),
+              controller: cubit.emailController,
               validator: (value) {
                 return Validators.validateEmail(
                   value,
@@ -53,7 +57,7 @@ class _SignInFormFieldsState extends State<SignInFormFields> {
                   context.tr(LangKeys.validPassword),
                 );
               },
-              controller: TextEditingController(),
+              controller: cubit.passwordController,
             ),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shopi/fetures/auth/login/data/models/login_response.dart';
-import 'package:shopi/fetures/auth/user%20role/data/models/user_role_response.dart';
+import 'package:shopi/fetures/auth/login/data/models/user%20role/models/user_role_response.dart';
 
 part 'api_service.g.dart';
 

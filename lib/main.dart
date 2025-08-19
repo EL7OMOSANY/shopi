@@ -12,5 +12,6 @@ Future<void> main() async {
   await SharedPref().instantiatePreferences();
   await setupDependencyInjection();
   await FlutterLocalization.instance.ensureInitialized();
+
   runApp(const Shopi());
 }

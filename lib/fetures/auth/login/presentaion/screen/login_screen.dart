@@ -4,7 +4,7 @@ import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/fetures/auth/login/presentaion/widgets/sign_in_form_fields.dart';
-import 'package:shopi/fetures/auth/login/presentaion/widgets/signin_button.dart';
+import 'package:shopi/fetures/auth/login/presentaion/widgets/login_button.dart';
 import 'package:shopi/fetures/auth/widgets/check_account.dart';
 import 'package:shopi/fetures/auth/widgets/head_and_caption_column.dart';
 import 'package:shopi/fetures/auth/widgets/lang_and_theme_row.dart';
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                 AppSpacing.v24,
                 SignInFormFields(),
                 AppSpacing.v24,
-                SignInButton(),
+                LogInButton(),
                 AppSpacing.v24,
                 CheckAccount(
                   text: context.tr(LangKeys.createAccount),
