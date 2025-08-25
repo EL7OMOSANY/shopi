@@ -6,8 +6,10 @@ import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dar
 import 'package:shopi/fetures/auth/login/presentaion/screen/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/screen/signup_screen.dart';
 import 'package:shopi/fetures/user/presentation/screen/user_home_screen.dart';
+import 'package:shopi/splash_screen.dart';
 
 class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -26,7 +28,10 @@ class AppRouter {
 
       case Routes.register:
         return CupertinoPageRoute(
-          builder: (_) => const SignupScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: const SignupScreen(),
+          ),
           settings: settings,
         );
       case Routes.adminHome:
@@ -38,6 +43,12 @@ class AppRouter {
       case Routes.userHome:
         return CupertinoPageRoute(
           builder: (_) => const UserHomeScreen(),
+          settings: settings,
+        );
+
+      case Routes.splash:
+        return CupertinoPageRoute(
+          builder: (_) => const SplashScreen(),
           settings: settings,
         );
 

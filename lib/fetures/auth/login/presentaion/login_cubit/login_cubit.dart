@@ -32,7 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
       result.when(
         success: (response) async {
           final String token = response.data?.loginData?.accessToken ?? '';
-          log("Login Success: $token");
+          log("Login Success in login cubit response token: $token");
           await SharedPref().setString(SharedPrefKeys.accessToken, token);
 
           final user = await authRepo.userRole(token);
@@ -41,6 +41,8 @@ class LoginCubit extends Cubit<LoginState> {
             SharedPrefKeys.userRole,
             user.userRole ?? '',
           );
+
+          log("user role in login cubit : ${user.userRole}");
 
           emit(LoginSuccess(role: user.userRole ?? ''));
         },

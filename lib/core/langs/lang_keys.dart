@@ -8,7 +8,7 @@ class LangKeys {
   static const String fieldIsRequired = 'field_is_required';
   static const String signIn = 'sign_in';
   static const String validEmail = 'valid_email';
-  static const String validPassword = 'valid_passwrod';
+  static const String validPassword = 'valid_password'; // ✅ Fixed typo
   static const String loggedSuccessfully = 'logged_successfully';
   static const String loggedError = 'logged_error';
   static const String createAccount = 'create_account';
@@ -34,4 +34,9 @@ class LangKeys {
   static const String no = 'no';
   static const String darkMode = 'dark_mode';
   static const String langCode = 'lang_code';
+  static const String customer = 'customer';
+  static const String admin = 'admin';
+  static const String or = 'or';
+  static const String congratulations = 'congratulations';
+  static const String plsSignIn = 'pls_sign_in';
 }

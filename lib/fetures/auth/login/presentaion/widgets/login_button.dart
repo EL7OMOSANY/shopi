@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
+import 'package:shopi/core/constants/shared_pref_keys.dart';
+import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/routes/routes.dart';
@@ -29,7 +33,11 @@ class LogInButton extends StatelessWidget {
               message: "Welcome back!",
             );
 
-            if (state.role == 'admin') {
+            String role = getRole(state.role);
+
+            log("role in login button : $role");
+
+            if (role == 'admin') {
               // Navigate to admin home screen
               context.pushNamedAndRemoveUntil(Routes.adminHome);
             } else {
@@ -77,4 +85,10 @@ class LogInButton extends StatelessWidget {
       ),
     );
   }
+}
+
+String getRole(String role) {
+  // Simulate a network call or any asynchronous operation
+  role = SharedPref().getString(SharedPrefKeys.userRole) ?? "";
+  return role;
 }

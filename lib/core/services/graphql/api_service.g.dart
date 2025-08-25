@@ -100,4 +100,25 @@ class _ApiService implements ApiService {
 
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
+
+  @override
+  Future<SignupResponse> signUp(Map<String, dynamic> signUpMutation) async {
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      Options(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: <String, dynamic>{},
+          )
+          .compose(
+            _dio.options,
+            graphql,
+            queryParameters: <String, dynamic>{},
+            data: signUpMutation,
+          )
+          .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl),
+    );
+
+    final value = SignupResponse.fromJson(_result.data!);
+    return value;
+  }
 }

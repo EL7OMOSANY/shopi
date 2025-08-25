@@ -9,8 +9,10 @@ import 'package:shopi/core/helpers/shared_pref_helper.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
-  await SharedPref().instantiatePreferences();
+
   await setupDependencyInjection();
+
+  await SharedPref().instantiatePreferences();
   await FlutterLocalization.instance.ensureInitialized();
 
   runApp(const Shopi());

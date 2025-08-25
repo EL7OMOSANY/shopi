@@ -38,7 +38,7 @@ class Shopi extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: cubit.isDark ? themeLight() : themeDark(),
                 onGenerateRoute: AppRouter.onGenerateRoute,
-                initialRoute: Routes.login,
+                initialRoute: Routes.splash,
               );
             },
           );

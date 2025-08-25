@@ -1,58 +1,50 @@
-// ignore_for_file: lines_longer_than_80_chars
+// import 'package:dio/dio.dart';
+// import 'package:flutter/material.dart';
+// import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+// import 'package:shopi/core/constants/shared_pref_keys.dart';
+// import 'package:shopi/core/helpers/shared_pref_helper.dart';
 
+// class DioFactory {
+//   DioFactory._();
 
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shopi/core/constants/shared_pref_keys.dart';
-import 'package:shopi/core/helpers/shared_pref_helper.dart';
+//   static Dio? dio;
 
-class DioFactory {
-  DioFactory._();
+//   static Dio getDio() {
+//     const timeOut = Duration(seconds: 30);
 
-  static Dio? dio;
+//     if (dio == null) {
+//       dio = Dio();
+//       dio!
+//         ..options.connectTimeout = timeOut
+//         ..options.receiveTimeout = timeOut;
 
-  static Dio getDio() {
-    const timeOut = Duration(seconds: 30);
+//       debugPrint(
+//         "[USER Token] ====> ${SharedPref().getString(SharedPrefKeys.accessToken) ?? 'NULL TOKEN'}",
+//       );
 
-    if (dio == null) {
-      dio = Dio();
-      dio!
-        ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
+//       addDioInterceptor();
+//       return dio!;
+//     } else {
+//       return dio!;
+//     }
+//   }
 
-      debugPrint(
-        "[USER Token] ====> ${SharedPref().getString(SharedPrefKeys.accessToken) ?? 'NULL TOKEN'}",
-      );
+//   static void addDioInterceptor() {
+//     dio?.interceptors.add(PrettyDioLogger(request: false, compact: false));
+//     // dio?.interceptors.add(
+//     //   InterceptorsWrapper(
+//     //     onRequest: (options, handler) {
+//     //       options.headers['Authorization'] =
+//     //           'Bearer ${SharedPref().getString(SharedPrefKeys.accessToken)}';
 
-      addDioInterceptor();
-      return dio!;
-    } else {
-      return dio!;
-    }
-  }
-
-  static void addDioInterceptor() {
-    dio?.interceptors.add(
-      PrettyDioLogger(
-        request: false,
-        compact: false,
-      ),
-    );
-    // dio?.interceptors.add(
-    //   InterceptorsWrapper(
-    //     onRequest: (options, handler) {
-    //       options.headers['Authorization'] =
-    //           'Bearer ${SharedPref().getString(SharedPrefKeys.accessToken)}';
-
-    //       return handler.next(options);
-    //     },
-    //     onError: (error, handler) async {
-    //       if (error.response?.statusCode == 401) {
-    //         await AppLogout().logout();
-    //       }
-    //     },
-    //   ),
-    // );
-  }
-}
+//     //       return handler.next(options);
+//     //     },
+//     //     onError: (error, handler) async {
+//     //       if (error.response?.statusCode == 401) {
+//     //         await AppLogout().logout();
+//     //       }
+//     //     },
+//     //   ),
+//     // );
+//   }
+// }

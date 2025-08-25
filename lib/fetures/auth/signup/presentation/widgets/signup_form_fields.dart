@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/utils/validators.dart';
 import 'package:shopi/core/widgets/custom_text_field.dart';
+import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
 
 class SignupFormFields extends StatefulWidget {
   const SignupFormFields({super.key});
@@ -20,31 +22,28 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<SignupCubit>();
     return Form(
-      // key: ,
-      child: Column(
-        children: [
-          CustomFadeInUp(
-            duration: 500,
-            child: CustomTextField(
+      key: cubit.formKey,
+      child: CustomFadeInUp(
+        duration: 500,
+        child: Column(
+          children: [
+            CustomTextField(
               hintText: context.tr(LangKeys.fullName),
-              obscureText: true,
+              controller: cubit.nameController,
               validator: (value) {
-                return Validators.validateRequired(
+                return Validators.validateUsername(
                   value,
                   context.tr(LangKeys.validName),
                 );
               },
-
-              controller: TextEditingController(),
             ),
-          ),
-          AppSpacing.v24,
-          CustomFadeInUp(
-            duration: 550,
-            child: CustomTextField(
+            AppSpacing.v24,
+
+            CustomTextField(
               hintText: context.tr(LangKeys.email),
-              controller: TextEditingController(),
+              controller: cubit.emailController,
               validator: (value) {
                 return Validators.validateEmail(
                   value,
@@ -52,12 +51,8 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
                 );
               },
             ),
-          ),
-
-          AppSpacing.v24,
-          CustomFadeInUp(
-            duration: 600,
-            child: CustomTextField(
+            AppSpacing.v24,
+            CustomTextField(
               hintText: context.tr(LangKeys.password),
               obscureText: isObscure,
               suffixIcon: IconButton(
@@ -75,10 +70,10 @@ class _SignupFormFieldsState extends State<SignupFormFields> {
                   context.tr(LangKeys.validPassword),
                 );
               },
-              controller: TextEditingController(),
+              controller: cubit.passwordController,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

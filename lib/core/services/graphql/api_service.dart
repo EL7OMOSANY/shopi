@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shopi/fetures/auth/login/data/models/login_response.dart';
 import 'package:shopi/fetures/auth/login/data/models/user%20role/models/user_role_response.dart';
+import 'package:shopi/fetures/auth/signup/data/models/signup_response.dart';
 
 part 'api_service.g.dart';
 
@@ -11,6 +12,7 @@ const String graphql = '/graphql';
 @RestApi(baseUrl: baseUrl)
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
+
   @POST(graphql)
   Future<LoginResponse> login(@Body() Map<String, dynamic> loginMutation);
 
@@ -22,10 +24,8 @@ abstract class ApiService {
   //   @Body() FormData file,
   // );
 
-  // @POST(graphql)
-  // Future<SignUpResponse> signUp(
-  //   @Body() Map<String, dynamic> mutation,
-  // );
+  @POST(graphql)
+  Future<SignupResponse> signUp(@Body() Map<String, dynamic> signUpMutation);
 
   // @POST(graphql)
   // Future<ProductsNumberResponse> numberOfProducts(

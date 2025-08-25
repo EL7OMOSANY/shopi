@@ -3,7 +3,8 @@ import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
-import 'package:shopi/fetures/auth/signup/presentation/widgets/prfile_image.dart';
+import 'package:shopi/fetures/auth/signup/presentation/widgets/choose_role.dart';
+import 'package:shopi/fetures/auth/signup/presentation/widgets/profile_image.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_button.dart';
 import 'package:shopi/fetures/auth/signup/presentation/widgets/signup_form_fields.dart';
 import 'package:shopi/fetures/auth/widgets/check_account.dart';
@@ -18,7 +19,10 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: 16, vertical: 24),
+          padding: EdgeInsetsDirectional.symmetric(
+            horizontal: 16,
+            vertical: 24,
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -27,11 +31,13 @@ class SignupScreen extends StatelessWidget {
                 ProfileImage(),
                 AppSpacing.v24,
                 HeadAndCaptionColumn(
-                  head:context.tr(LangKeys.signUp),
+                  head: context.tr(LangKeys.signUp),
                   caption: context.tr(LangKeys.signUpWelcome),
                 ),
                 AppSpacing.v24,
                 SignupFormFields(),
+                AppSpacing.v24,
+                ChooseRole(),
                 AppSpacing.v24,
                 SignupButton(),
 
