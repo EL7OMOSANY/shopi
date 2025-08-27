@@ -55,6 +55,8 @@ dependencies:
   retrofit: ^4.7.2
   pretty_dio_logger: ^1.4.0
   image_picker: ^1.2.0
+  flutter_zoom_drawer: ^3.2.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -42,7 +42,7 @@ class LogInButton extends StatelessWidget {
               context.pushNamedAndRemoveUntil(Routes.adminHome);
             } else {
               // Handle other roles if necessary
-              context.pushNamedAndRemoveUntil(Routes.userHome);
+              context.pushNamedAndRemoveUntil(Routes.customerHome);
             }
           } else if (state is LoginError) {
             // show error message

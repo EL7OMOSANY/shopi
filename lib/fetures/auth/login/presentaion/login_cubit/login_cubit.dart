@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
@@ -50,7 +51,7 @@ class LoginCubit extends Cubit<LoginState> {
           emit(LoginError(message: "Login Error in login cubit  : $error"));
         },
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(LoginError(message: "Login Error in login cubit response  : $e"));
     }
   }

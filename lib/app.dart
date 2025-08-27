@@ -16,6 +16,8 @@ class Shopi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String token = SharedPref().getString(SharedPrefKeys.accessToken) ?? '';
+    String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
     return BlocProvider(
       create: (context) => getIt<AppCubit>()
         ..changeAppTheme(
@@ -38,7 +40,12 @@ class Shopi extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: cubit.isDark ? themeLight() : themeDark(),
                 onGenerateRoute: AppRouter.onGenerateRoute,
-                initialRoute: Routes.splash,
+                // ignore: unnecessary_null_comparison
+                initialRoute: token.isEmpty || token == "" || token == null
+                    ? Routes.splash
+                    : role == 'admin'
+                    ? Routes.adminHome
+                    : Routes.customerHome,
               );
             },
           );
