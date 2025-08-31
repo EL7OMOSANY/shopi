@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/utils/admin_drawer_list.dart';
-import 'package:shopi/fetures/admin/fetures/dashboard/presentation/widgets/admin_appbar.dart';
 
 class AdminHomeContent extends StatelessWidget {
   const AdminHomeContent({required this.onPageChanged, super.key});

@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/data/models/category_nums_response.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/data/models/products_nums_response.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/data/models/users_nums_response.dart';
 import 'package:shopi/fetures/auth/login/data/models/login_response.dart';
 import 'package:shopi/fetures/auth/login/data/models/user%20role/models/user_role_response.dart';
 import 'package:shopi/fetures/auth/signup/data/models/signup_response.dart';
@@ -19,28 +22,21 @@ abstract class ApiService {
   @GET('/api/v1/auth/profile')
   Future<UserRoleResponse> userRole();
 
-  // @POST('/api/v1/files/upload')
-  // Future<UploadImageResourse> uploadImage(
-  //   @Body() FormData file,
-  // );
-
   @POST(graphql)
   Future<SignupResponse> signUp(@Body() Map<String, dynamic> signUpMutation);
 
-  // @POST(graphql)
-  // Future<ProductsNumberResponse> numberOfProducts(
-  //   @Body() Map<String, dynamic> query,
-  // );
+  @POST(graphql)
+  Future<ProductsNumsResponse> numberOfProducts(
+    @Body() Map<String, dynamic> query,
+  );
 
-  // @POST(graphql)
-  // Future<CategoriesNumberResponse> numberOfCategories(
-  //   @Body() Map<String, dynamic> query,
-  // );
+  @POST(graphql)
+  Future<CategoryNumsResponse> numberOfCategories(
+    @Body() Map<String, dynamic> query,
+  );
 
-  // @POST(graphql)
-  // Future<UsersNumberResponse> numberOfUsers(
-  //   @Body() Map<String, dynamic> query,
-  // );
+  @POST(graphql)
+  Future<UsersNumsResponse> numberOfUsers(@Body() Map<String, dynamic> query);
 
   // @POST(graphql)
   // Future<CategoriesGetAllResponse> getAllCategories(

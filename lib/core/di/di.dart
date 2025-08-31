@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
 import 'package:shopi/core/services/graphql/api_service.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/data/repo/dashboard_repos.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/auth/auth_repos/auth_repos.dart';
 import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
@@ -29,6 +31,8 @@ Future<void> setupDependencyInjection() async {
   initApp();
 
   initAppAuth();
+
+  dashboardInit();
 }
 
 Future<void> initApp() async {
@@ -56,4 +60,16 @@ Future<void> initAppAuth() async {
   // SignUp
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt<AuthRepos>()));
   log("✅ SignupCubit registered");
+}
+
+Future<void> dashboardInit() async {
+  getIt.registerLazySingleton<DashboardRepos>(
+    () => DashboardRepos(getIt<ApiService>()),
+  );
+  log("✅ DashboardRepos registered");
+
+  getIt.registerFactory<DashboardCubit>(
+    () => DashboardCubit(getIt<DashboardRepos>()),
+  );
+  log("✅ DashboardCubit registered");
 }

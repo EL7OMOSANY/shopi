@@ -1,177 +1,82 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:shopi/core/constants/app_images.dart';
-// import 'package:shopi/core/constants/app_text_styles.dart';
-// import 'package:shopi/core/widgets/custom_admin_container.dart';
-// import 'package:shopi/core/widgets/text_app.dart';
-// import 'package:shopi/fetures/admin/fetures/dashboard/presentation/widgets/dashboard_contrainer.dart';
-
-// class DashBoardBody extends StatelessWidget {
-//   const DashBoardBody({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-// //     return Padding(
-// //       padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
-// //       child: RefreshIndicator(
-// //         onRefresh: () async {
-// //           // context
-// //           //     .read<ProductsNumberBloc>()
-// //           //     .add(const ProductsNumberEvent.getProductsNumber());
-// //           // context
-// //           //     .read<CategoriesNumberBloc>()
-// //           //     .add(const CategoriesNumberEvent.getCategoriesNumber());
-// //           // context
-// //           //     .read<UsersNumberBloc>()
-// //           //     .add(const UsersNumberEvent.getUsersNumber());
-// //         },
-// //         child: ListView(
-// //           children: [
-// //             //Products
-// //             BlocBuilder<ProductsNumberBloc, ProductsNumberState>(
-// //               builder: (context, state) {
-// //                 return state.when(
-// //                   loading: () {
-// //                     return const DashBoardContiner(
-// //                       image: AppImages.productsDrawer,
-// //                       number: '',
-// //                       title: 'Products',
-// //                       isLoading: true,
-// //                     );
-// //                   },
-// //                   success: (productNumber) {
-// //                     return DashBoardContiner(
-// //                       image: AppImages.productsDrawer,
-// //                       number: productNumber,
-// //                       title: 'Products',
-// //                       isLoading: false,
-// //                     );
-// //                   },
-// //                   error: (errorMessage) {
-// //                     return TextApp(
-// //                       text: errorMessage,
-// //                       theme: context.textStyle.copyWith(
-// //                         color: Colors.red,
-// //                         fontSize: 16.sp,
-// //                       ),
-// //                     );
-// //                   },
-// //                 );
-// //               },
-// //             ),
-// //             SizedBox(height: 20.h),
-// //             //Categories
-// //             BlocBuilder<CategoriesNumberBloc, CategoriesNumberState>(
-// //               builder: (context, state) {
-// //                 return state.when(
-// //                   loading: () {
-// //                     return const DashBoardContiner(
-// //                       image: AppImages.productsDrawer,
-// //                       number: '',
-// //                       title: 'Categories',
-// //                       isLoading: true,
-// //                     );
-// //                   },
-// //                   success: (categoryNumber) {
-// //                     return CustomContainerLinearAdmin(
-// //                       image: AppImages.categoriesDrawer,
-// //                       number: categoryNumber,
-// //                       title: 'Categories',
-// //                       isLoading: false,
-// //                     );
-// //                   },
-// //                   error: (errorMessage) {
-// //                     return TextApp(
-// //                       text: errorMessage,
-// //                       theme: context.textStyle.copyWith(
-// //                         color: Colors.red,
-// //                         fontSize: 16.sp,
-// //                       ),
-// //                     );
-// //                   },
-// //                 );
-// //               },
-// //             ),
-// //             SizedBox(height: 20.h),
-// //             //Users
-// //             BlocBuilder<UsersNumberBloc, UsersNumberState>(
-// //               builder: (context, state) {
-// //                 return state.when(
-// //                   loading: () {
-// //                     return const DashBoardContiner(
-// //                       image: AppImages.productsDrawer,
-// //                       number: '',
-// //                       title: 'Users',
-// //                       isLoading: true,
-// //                     );
-// //                   },
-// //                   success: (categoryNumber) {
-// //                     return DashBoardContiner(
-// //                       image: AppImages.usersDrawer,
-// //                       number: categoryNumber,
-// //                       title: 'Users',
-// //                       isLoading: false,
-// //                     );
-// //                   },
-// //                   error: (errorMessage) {
-// //                     return TextApp(
-// //                       text: errorMessage,
-// //                       style: AppTextStyles.text16w700.copyWith(
-// //                         color: Colors.red,
-// //                       ),
-// //                     );
-// //                   },
-// //                 );
-// //               },
-// //             ),
-// //           ],
-// //         ),
-// //       ),
-// //     );
-// //   }
-// // }
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/constants/app_images.dart';
+import 'package:shopi/core/constants/app_spacer.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_state.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/widgets/dashboard_contrainer.dart';
 
 class DashBoardBody extends StatelessWidget {
   const DashBoardBody({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DashboardCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
-      child: ListView(
-        children: [
-          // Products
-          const DashBoardContiner(
-            image: AppImages.productsDrawer,
-            number: '120', // static number
-            title: 'Products',
-            isLoading: false,
-          ),
-          SizedBox(height: 20.h),
-
-          // Categories
-          const DashBoardContiner(
-            image: AppImages.categoriesDrawer,
-            number: '50', // static number
-            title: 'Categories',
-            isLoading: false,
-          ),
-          SizedBox(height: 20.h),
-
-          // Users
-          const DashBoardContiner(
-            image: AppImages.usersDrawer,
-            number: '50', // static number
-            title: 'Users',
-            isLoading: false,
-          ),
-        ],
+      child: BlocBuilder<DashboardCubit, DashboardState>(
+        builder: (context, state) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              cubit.getProductsNums();
+              cubit.getCategoriesNums();
+              cubit.getUsersNums();
+            },
+            child: ListView(
+              children: [
+                // Products
+                BlocBuilder<DashboardCubit, DashboardState>(
+                  buildWhen: (prev, curr) =>
+                      curr is ProductsLoading ||
+                      curr is ProductsLoaded ||
+                      curr is ProductsFailure,
+                  builder: (context, state) {
+                    return DashBoardContiner(
+                      image: AppImages.productsDrawer,
+                      number: state is ProductsLoaded ? state.products : '0',
+                      title: 'Products',
+                      isLoading: state is ProductsLoading,
+                    );
+                  },
+                ),
+                AppSpacing.v24,
+                // Categories
+                BlocBuilder<DashboardCubit, DashboardState>(
+                  buildWhen: (prev, curr) =>
+                      curr is CategoriesLoading ||
+                      curr is CategoriesLoaded ||
+                      curr is CategoriesFailure,
+                  builder: (context, state) {
+                    return DashBoardContiner(
+                      image: AppImages.categoriesDrawer,
+                      number: state is CategoriesLoaded
+                          ? state.categories
+                          : '0',
+                      title: 'Categories',
+                      isLoading: state is CategoriesLoading,
+                    );
+                  },
+                ),
+                AppSpacing.v24,
+                // Users
+                BlocBuilder<DashboardCubit, DashboardState>(
+                  buildWhen: (prev, curr) =>
+                      curr is UsersLoading ||
+                      curr is UsersLoaded ||
+                      curr is UsersFailure,
+                  builder: (context, state) {
+                    return DashBoardContiner(
+                      image: AppImages.usersDrawer,
+                      number: state is UsersLoaded ? state.users : '0',
+                      title: 'Users',
+                      isLoading: state is UsersLoading,
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

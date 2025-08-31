@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:shopi/fetures/admin/fetures/category/presentation/screens/category_screen.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:shopi/fetures/admin/fetures/notifications/presentation/screens/notification_screen.dart';
 import 'package:shopi/fetures/admin/fetures/products/presentation/screens/products_screen.dart';

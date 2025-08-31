@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/style/colors/dark_colors.dart';
+import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/widgets/admin_appbar.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/widgets/dashboard_body.dart';
 
@@ -15,7 +18,13 @@ class DashboardScreen extends StatelessWidget {
         isMain: true,
         backgroundColor: ColorsDark.mainColor,
       ),
-      body: DashBoardBody(),
+      body: BlocProvider(
+        create: (context) => getIt<DashboardCubit>()
+          ..getProductsNums()
+          ..getCategoriesNums()
+          ..getUsersNums(),
+        child: DashBoardBody(),
+      ),
     );
   }
 }
