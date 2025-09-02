@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:shopi/core/app/upload_image_cubit/models/upload_image_resourse.dart';
+import 'package:shopi/fetures/admin/fetures/category/data/models/create_category_response.dart';
+import 'package:shopi/fetures/admin/fetures/category/data/models/get_all_categories_response.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/models/category_nums_response.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/models/products_nums_response.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/models/users_nums_response.dart';
@@ -38,25 +41,24 @@ abstract class ApiService {
   @POST(graphql)
   Future<UsersNumsResponse> numberOfUsers(@Body() Map<String, dynamic> query);
 
-  // @POST(graphql)
-  // Future<CategoriesGetAllResponse> getAllCategories(
-  //   @Body() Map<String, dynamic> query,
-  // );
+  @POST(graphql)
+  Future<GetAllCategoriesResponse> getAllCategories(
+    @Body() Map<String, dynamic> query,
+  );
 
-  // @POST(graphql)
-  // Future<CreateCategoryResponse> createCategory(
-  //   @Body() Map<String, dynamic> mutation,
-  // );
+  @POST(graphql)
+  Future<CreateCategoryResponse> createCategory(
+    @Body() Map<String, dynamic> mutation,
+  );
 
-  // @POST(graphql)
-  // Future<void> deleteCategory(
-  //   @Body() Map<String, dynamic> mutation,
-  // );
+  @POST(graphql)
+  Future<void> deleteCategory(@Body() Map<String, dynamic> mutation);
 
-  // @POST(graphql)
-  // Future<void> updateCategory(
-  //   @Body() Map<String, dynamic> mutation,
-  // );
+  @POST(graphql)
+  Future<void> updateCategory(@Body() Map<String, dynamic> mutation);
+
+  @POST('/api/v1/files/upload')
+  Future<UploadImageResourse> uploadImage(@Body() FormData file);
 
   // @POST(graphql)
   // Future<GetAllProductResponse> getAllProduct(

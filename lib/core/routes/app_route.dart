@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopi/core/app/upload_image_cubit/upload_image_cubit.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:shopi/fetures/admin/fetures/category/presentation/screens/category_screen.dart';
-import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:shopi/fetures/admin/fetures/notifications/presentation/screens/notification_screen.dart';
 import 'package:shopi/fetures/admin/fetures/products/presentation/screens/products_screen.dart';
@@ -37,6 +37,7 @@ class AppRouter {
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<SignupCubit>(),
+
             child: const SignupScreen(),
           ),
           settings: settings,
@@ -56,7 +57,10 @@ class AppRouter {
       case Routes.adminHomeContent:
       case Routes.addCategory:
         return CupertinoPageRoute(
-          builder: (_) => const CategoryScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<UploadImageCubit>(),
+            child: const CategoryScreen(),
+          ),
           settings: settings,
         );
 

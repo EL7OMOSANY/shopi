@@ -2,7 +2,11 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
+import 'package:shopi/core/app/upload_image_cubit/repo/upload_image_repo.dart';
+import 'package:shopi/core/app/upload_image_cubit/upload_image_cubit.dart';
 import 'package:shopi/core/services/graphql/api_service.dart';
+import 'package:shopi/fetures/admin/fetures/category/data/repo/categories_repos.dart';
+import 'package:shopi/fetures/admin/fetures/category/presentation/categories_cubit/cubit/categories_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/repo/dashboard_repos.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/auth/auth_repos/auth_repos.dart';
@@ -33,6 +37,8 @@ Future<void> setupDependencyInjection() async {
   initAppAuth();
 
   dashboardInit();
+
+  allcategoriesInit();
 }
 
 Future<void> initApp() async {
@@ -46,6 +52,14 @@ Future<void> initApp() async {
 
   getIt.registerFactory<AppCubit>(() => AppCubit());
   log("✅ AppCubit registered");
+
+  getIt.registerFactory<UploadImageCubit>(() => UploadImageCubit(getIt()));
+
+  log("✅ UploadImageCubit registered");
+
+  getIt.registerLazySingleton<UploadImageRepo>(() => UploadImageRepo(getIt()));
+
+  log("✅ UploadImageRepo registered");
 }
 
 Future<void> initAppAuth() async {
@@ -63,13 +77,17 @@ Future<void> initAppAuth() async {
 }
 
 Future<void> dashboardInit() async {
-  getIt.registerLazySingleton<DashboardRepos>(
-    () => DashboardRepos(getIt<ApiService>()),
-  );
+  getIt.registerLazySingleton<DashboardRepos>(() => DashboardRepos(getIt()));
   log("✅ DashboardRepos registered");
 
-  getIt.registerFactory<DashboardCubit>(
-    () => DashboardCubit(getIt<DashboardRepos>()),
-  );
+  getIt.registerFactory<DashboardCubit>(() => DashboardCubit(getIt()));
   log("✅ DashboardCubit registered");
+}
+
+Future<void> allcategoriesInit() async {
+  getIt.registerLazySingleton<CategoriesRepos>(() => CategoriesRepos(getIt()));
+  log("✅ CategoriesRepos registered");
+
+  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+  log("✅ CategoriesCubit registered");
 }

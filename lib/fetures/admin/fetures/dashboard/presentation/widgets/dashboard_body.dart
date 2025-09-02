@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/constants/app_images.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_state.dart';
@@ -17,6 +18,8 @@ class DashBoardBody extends StatelessWidget {
       child: BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {
           return RefreshIndicator(
+            // ignore: deprecated_member_use
+            color: context.color.textFormBorder!.withOpacity(.7),
             onRefresh: () async {
               cubit.getProductsNums();
               cubit.getCategoriesNums();

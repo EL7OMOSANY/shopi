@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
 import 'package:shopi/core/app/app_cubit/app_state.dart';
+import 'package:shopi/core/app/upload_image_cubit/upload_image_cubit.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
@@ -18,12 +19,18 @@ class Shopi extends StatelessWidget {
   Widget build(BuildContext context) {
     String token = SharedPref().getString(SharedPrefKeys.accessToken) ?? '';
     String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
-    return BlocProvider(
-      create: (context) => getIt<AppCubit>()
-        ..changeAppTheme(
-          sharedTheme: SharedPref().getBoolean(SharedPrefKeys.isDark) ?? false,
-        )
-        ..getSavedLanguage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AppCubit>()
+            ..changeAppTheme(
+              sharedTheme:
+                  SharedPref().getBoolean(SharedPrefKeys.isDark) ?? false,
+            )
+            ..getSavedLanguage(),
+        ),
+        BlocProvider(create: (context) => getIt<UploadImageCubit>()),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
