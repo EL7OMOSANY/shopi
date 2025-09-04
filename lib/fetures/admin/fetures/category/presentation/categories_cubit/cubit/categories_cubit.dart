@@ -16,6 +16,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   final CategoriesRepos _categoriesRepos;
 
   List<CategoryContent> categoriesList = [];
+  List<String> dropdownList = [];
 
   //get all categories
   Future<void> getAllCategories() async {
@@ -30,8 +31,9 @@ class CategoriesCubit extends Cubit<CategoriesState> {
             emit(SuccessGetAllCategoryState(categoriesList: categoriesList));
           } else {
             categoriesList = response.getAllCategoriesList;
+            dropdownList = response.categoryDropdownList;
+            log(dropdownList.toString());
             log("getAllCategoriesList is not empty");
-
             emit(SuccessGetAllCategoryState(categoriesList: categoriesList));
           }
         },
@@ -119,4 +121,17 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       emit(ErrorUpdateCategoryState(error: error.toString()));
     }
   }
+
+  // //function for dropDown categryList from  GetAllCategoriesResponse
+  // List<int> categoryList = [];
+  // void getCategoryDropDownList(GetAllCategoriesResponse getAllCategoriesResponse) {
+  //   for (
+  //     int i = 0;
+  //     i < getAllCategoriesResponse.categoryDropdownList.length;
+  //     i++
+  //   ) {
+  //     categoryList.add(i + 1);
+  //   }
+
+  // }
 }

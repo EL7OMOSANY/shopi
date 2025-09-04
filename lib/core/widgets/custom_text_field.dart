@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.maxLength,
     this.maxLines = 1,
+    this.textInputAction,
   });
 
   final String? Function(String?)? validator;
@@ -38,6 +39,8 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final int? maxLength;
   final int? maxLines;
+  //text input action
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +60,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       maxLines: maxLines,
       readOnly: readOnly,
+      textInputAction: textInputAction,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
         enabledBorder: OutlineInputBorder(

@@ -20,12 +20,12 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LoginResponse> login(Map<String, dynamic> loginMutation) async {
+  Future<LoginResponse> login(Map<String, dynamic> mutation) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(loginMutation);
+    _data.addAll(mutation);
     final _options = _setStreamType<LoginResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -75,12 +75,39 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SignupResponse> signUp(Map<String, dynamic> signUpMutation) async {
+  Future<UploadImageResourse> uploadImage(FormData file) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = file;
+    final _options = _setStreamType<UploadImageResourse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/v1/files/upload',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UploadImageResourse _value;
+    try {
+      _value = UploadImageResourse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SignupResponse> signUp(Map<String, dynamic> mutation) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(signUpMutation);
+    _data.addAll(mutation);
     final _options = _setStreamType<SignupResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -291,17 +318,103 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<UploadImageResourse> uploadImage(FormData file) async {
-    const _extra = <String, dynamic>{};
+  Future<GetAllProductsResponse> getAllProduct(
+    Map<String, dynamic> query,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = file;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _options = _setStreamType<GetAllProductsResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(_dio.options, '/api/v1/files/upload', data: _data)
-          .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl),
+          .compose(
+            _dio.options,
+            '/graphql',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final value = UploadImageResourse.fromJson(_result.data!);
-    return value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAllProductsResponse _value;
+    try {
+      _value = GetAllProductsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<Map<String, dynamic>> createProduct(
+    Map<String, dynamic> mutation,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(mutation);
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/graphql',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late Map<String, dynamic> _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> deleteProduct(Map<String, dynamic> mutation) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(mutation);
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/graphql',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> updateProduct(Map<String, dynamic> mutation) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(mutation);
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/graphql',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -9,6 +9,8 @@ import 'package:shopi/fetures/admin/fetures/category/data/repo/categories_repos.
 import 'package:shopi/fetures/admin/fetures/category/presentation/categories_cubit/cubit/categories_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/repo/dashboard_repos.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
+import 'package:shopi/fetures/admin/fetures/products/data/repo/products_repos.dart';
+import 'package:shopi/fetures/admin/fetures/products/presentation/products_cubit/products_cubit.dart';
 import 'package:shopi/fetures/auth/auth_repos/auth_repos.dart';
 import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
@@ -39,6 +41,8 @@ Future<void> setupDependencyInjection() async {
   dashboardInit();
 
   allcategoriesInit();
+
+  allProductsInit();
 }
 
 Future<void> initApp() async {
@@ -90,4 +94,12 @@ Future<void> allcategoriesInit() async {
 
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
   log("✅ CategoriesCubit registered");
+}
+
+Future<void> allProductsInit() async {
+  getIt.registerLazySingleton<ProductsRepos>(() => ProductsRepos(getIt()));
+  log("✅ ProductsRepos registered");
+
+  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
+  log("✅ ProductsCubit registered");
 }

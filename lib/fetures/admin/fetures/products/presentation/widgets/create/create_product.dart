@@ -3,41 +3,46 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/buutom_sheet/custom_buttom_sheet.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
+import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/widgets/custom_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 import 'package:shopi/fetures/admin/fetures/category/presentation/categories_cubit/cubit/categories_cubit.dart';
-import 'package:shopi/fetures/admin/fetures/category/presentation/widgets/create/create_category_button.dart';
+import 'package:shopi/fetures/admin/fetures/products/presentation/products_cubit/products_cubit.dart';
+import 'package:shopi/fetures/admin/fetures/products/presentation/widgets/create/create_product_bottom_sheet.dart';
 
-class CreateCategoryButton extends StatelessWidget {
-  const CreateCategoryButton({super.key});
+class CreateProduct extends StatelessWidget {
+  const CreateProduct({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CategoriesCubit>();
+    final cubit = context.read<ProductsCubit>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextApp(
-          text: 'Get All Categories',
-          style: AppTextStyles.text20w700.copyWith(
-            color: Colors.white.withOpacity(.9),
-          ),
+          text: 'Get All Products',
+          style: AppTextStyles.text18w500.copyWith(color: Colors.white),
         ),
         CustomButton(
           onPressed: () {
             CustomButtomSheet.showModalBottomSheetContainer(
               context: context,
-              widget: BlocProvider.value(
-                value: cubit,
-                child: CreateCategoryBottomSheetWidget(),
+              widget: MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (context) => getIt<ProductsCubit>()),
+                  BlocProvider(
+                    create: (context) =>
+                        getIt<CategoriesCubit>()..getAllCategories(),
+                  ),
+                ],
+                child: CreateProductBottomSheet(),
               ),
               whenComplete: () {
-                cubit.getAllCategories();
+                cubit.getAllProducts();
               },
             );
           },
-          // ignore: deprecated_member_use
           backgroundColor: context.color.textFormBorder!.withOpacity(.5),
           lastRadius: 10,
           threeRadius: 10,

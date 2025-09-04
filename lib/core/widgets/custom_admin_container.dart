@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/style/colors/dark_colors.dart';
 
 class CustomContainerLinearAdmin extends StatelessWidget {
@@ -22,11 +23,13 @@ class CustomContainerLinearAdmin extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
           colors: [
-            ColorsDark.black1.withOpacity(0.8),
-            ColorsDark.black2.withOpacity(0.8),
+            context.color.textFormBorder!.withOpacity(.5),
+            context.color.navBarbg!.withOpacity(.5),
+
+            // context.color.textFormBorder!.withOpacity(.5),
           ],
-          begin: const Alignment(0.36, 0.27),
-          end: const Alignment(0.58, 0.85),
+          begin: Alignment.center,
+          end: Alignment.bottomCenter,
         ),
         boxShadow: [
           BoxShadow(
