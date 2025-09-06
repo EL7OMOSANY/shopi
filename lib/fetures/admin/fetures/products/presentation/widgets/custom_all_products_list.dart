@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shopi/core/shimmer/loading_shimmer.dart';
 import 'package:shopi/fetures/admin/fetures/products/presentation/products_cubit/products_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/products/presentation/widgets/product_admin_item.dart';
@@ -61,16 +62,26 @@ class CustomAllProductsList extends StatelessWidget {
                                 childAspectRatio: 165 / 250,
                               ),
                           itemBuilder: (context, index) {
-                            return ProductAdminItem(
-                              imageUrl: productList[index].images!.first,
-                              productId: productList[index].id ?? '',
-                              categoryName:
-                                  productList[index].category!.name ?? '',
-                              price: productList[index].price.toString(),
-                              title: productList[index].title ?? '',
-                              imageList: productList[index].images ?? [],
-                              description: productList[index].description ?? '',
-                              categoryId: productList[index].category!.id ?? '',
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: const Duration(milliseconds: 500),
+                              child: ScaleAnimation(
+                                child: FadeInAnimation(
+                                  child: ProductAdminItem(
+                                    imageUrl: productList[index].images!.first,
+                                    productId: productList[index].id ?? '',
+                                    categoryName:
+                                        productList[index].category!.name ?? '',
+                                    price: productList[index].price.toString(),
+                                    title: productList[index].title ?? '',
+                                    imageList: productList[index].images ?? [],
+                                    description:
+                                        productList[index].description ?? '',
+                                    categoryId:
+                                        productList[index].category!.id ?? '',
+                                  ),
+                                ),
+                              ),
                             );
                           },
                         );

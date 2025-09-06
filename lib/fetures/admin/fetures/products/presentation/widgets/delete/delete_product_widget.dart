@@ -19,11 +19,6 @@ class DeleteProductWidget extends StatelessWidget {
         listener: (context, state) {
           if (state is SuccessDeleteProductState) {
             cubit.getAllProducts();
-            ToastUtils.showSuccess(
-              context,
-              title: 'Success',
-              message: 'Your product has been deleted',
-            );
           } else if (state is ErrorDeleteProductState) {
             ToastUtils.showError(context, title: 'Error', message: state.error);
           }
@@ -37,6 +32,16 @@ class DeleteProductWidget extends StatelessWidget {
               : InkWell(
                   onTap: () {
                     cubit.deleteProduct(DeleteProduct(id: productId));
+
+                    Future.delayed(const Duration(milliseconds: 700), () {
+                      if (context.mounted) {
+                        ToastUtils.showSuccess(
+                          context,
+                          title: 'Success',
+                          message: 'Your product has been deleted',
+                        );
+                      }
+                    });
                   },
                   child: const Icon(
                     Icons.delete,

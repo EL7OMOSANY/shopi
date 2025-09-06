@@ -37,7 +37,7 @@ class SignupScreen extends StatelessWidget {
                 AppSpacing.v24,
                 SignupFormFields(),
                 AppSpacing.v24,
-                ChooseRole(),
+                CustomFadeInUp(duration: 600, child: ChooseRole()),
                 AppSpacing.v24,
                 SignupButton(),
 

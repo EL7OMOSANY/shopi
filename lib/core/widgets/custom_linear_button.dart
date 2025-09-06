@@ -18,6 +18,7 @@ class CustomLinearButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      // ignore: deprecated_member_use
       splashColor: context.color.bluePinkLight!.withOpacity(0.3),
       onTap: onPressed,
       child: Container(
@@ -29,8 +30,10 @@ class CustomLinearButton extends StatelessWidget {
           ),
           gradient: LinearGradient(
             colors: [
-              context.color.bluePinkLight!,
-              context.color.bluePinkDark!,
+              // ignore: deprecated_member_use
+              context.color.bluePinkLight!.withOpacity(0.8),
+              // ignore: deprecated_member_use
+              context.color.bluePinkDark!.withOpacity(0.8),
             ],
             begin: const Alignment(0.46, -0.89),
             end: const Alignment(-0.46, 0.89),

@@ -7,6 +7,7 @@ import 'package:shopi/fetures/admin/fetures/dashboard/data/models/category_nums_
 import 'package:shopi/fetures/admin/fetures/dashboard/data/models/products_nums_response.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/models/users_nums_response.dart';
 import 'package:shopi/fetures/admin/fetures/products/data/models/get_all_products_response.dart';
+import 'package:shopi/fetures/admin/fetures/users/data/models/get_all_users_response.dart';
 import 'package:shopi/fetures/auth/login/data/models/login_response.dart';
 import 'package:shopi/fetures/auth/login/data/models/user%20role/models/user_role_response.dart';
 import 'package:shopi/fetures/auth/signup/data/models/signup_response.dart';
@@ -21,7 +22,7 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(graphql)
-  Future<LoginResponse> login(@Body() Map<String, dynamic> mutation);
+  Future<Map<String, dynamic>> login(@Body() Map<String, dynamic> mutation);
 
   @GET('/api/v1/auth/profile')
   Future<UserRoleResponse> userRole();
@@ -77,15 +78,11 @@ abstract class ApiService {
   @POST(graphql)
   Future<void> updateProduct(@Body() Map<String, dynamic> mutation);
 
-  // @POST(graphql)
-  // Future<GetAllUsersResponse> getAllUsers(
-  //   @Body() Map<String, dynamic> query,
-  // );
+  @POST(graphql)
+  Future<GetAllUsersResponse> getAllUsers(@Body() Map<String, dynamic> query);
 
-  // @POST(graphql)
-  // Future<void> deleteUser(
-  //   @Body() Map<String, dynamic> mutation,
-  // );
+  @POST(graphql)
+  Future<void> deleteUser(@Body() Map<String, dynamic> mutation);
 
   // @POST(graphql)
   // Future<BannersResponse> getBanners(

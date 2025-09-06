@@ -22,6 +22,11 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login() async {
     emit(LoginLoading());
 
+    if (!formKey.currentState!.validate()) {
+      emit(LoginError(message: "Please fill all fields correctly"));
+      return;
+    }
+
     try {
       final result = await authRepo.login(
         LoginRequest(
@@ -33,9 +38,11 @@ class LoginCubit extends Cubit<LoginState> {
       result.when(
         success: (response) async {
           final String token = response.data?.loginData?.accessToken ?? '';
-          log("Login Success in login cubit response token: $token");
+          log("✅ Login Success in cubit, token: $token");
+
           await SharedPref().setString(SharedPrefKeys.accessToken, token);
 
+          // Get role
           final user = await authRepo.userRole(token);
           await SharedPref().setInt(SharedPrefKeys.userId, user.userId ?? 0);
           await SharedPref().setString(
@@ -43,16 +50,20 @@ class LoginCubit extends Cubit<LoginState> {
             user.userRole ?? '',
           );
 
-          log("user role in login cubit : ${user.userRole}");
-
+          log("👤 Role in cubit: ${user.userRole}");
           emit(LoginSuccess(role: user.userRole ?? ''));
         },
         failure: (error) {
-          emit(LoginError(message: "Login Error in login cubit  : $error"));
+          log("❌ Login Failed: $error");
+          emit(LoginError(message: error));
         },
       );
     } on DioException catch (e) {
-      emit(LoginError(message: "Login Error in login cubit response  : $e"));
+      log("❌ Dio Exception in login: $e");
+      emit(LoginError(message: e.message ?? "Unknown Dio Error"));
+    } catch (e) {
+      log("❌ General Exception in login: $e");
+      emit(LoginError(message: e.toString()));
     }
   }
 }

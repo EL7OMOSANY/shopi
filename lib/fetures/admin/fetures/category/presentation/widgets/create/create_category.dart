@@ -21,6 +21,7 @@ class CreateCategoryButton extends StatelessWidget {
         TextApp(
           text: 'Get All Categories',
           style: AppTextStyles.text20w700.copyWith(
+            // ignore: deprecated_member_use
             color: Colors.white.withOpacity(.9),
           ),
         ),

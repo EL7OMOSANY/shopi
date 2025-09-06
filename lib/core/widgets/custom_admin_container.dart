@@ -23,7 +23,9 @@ class CustomContainerLinearAdmin extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
           colors: [
+            // ignore: deprecated_member_use
             context.color.textFormBorder!.withOpacity(.5),
+            // ignore: deprecated_member_use
             context.color.navBarbg!.withOpacity(.5),
 
             // context.color.textFormBorder!.withOpacity(.5),

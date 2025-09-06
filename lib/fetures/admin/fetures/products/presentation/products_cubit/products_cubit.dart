@@ -76,7 +76,6 @@ class ProductsCubit extends Cubit<ProductsState> {
         success: (response) {
           log("✅ Raw createProduct response: ${response.toJson()}");
 
-          // بنشيك لو فيه data أو لأ
           if (response.data == null || response.data?.product == null) {
             log("❌ createProduct failed: response.data is null");
             emit(

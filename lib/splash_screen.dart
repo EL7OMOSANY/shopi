@@ -27,11 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF0f2027), Color(0xFF203a43), Color(0xFF2c5364)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            colors: [context.color.navBarbg!, context.color.textFormBorder!],
+            center: Alignment.center, // تبقى من النص
+            radius: 1.0, // كل ما تزود الرقم الدائرة تكبر
+            tileMode: TileMode.mirror, // يخليها زي دوريات متكررة
           ),
         ),
         child: Column(

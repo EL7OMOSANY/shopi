@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/shimmer/loading_shimmer.dart';
 import 'package:shopi/core/utils/toast_utils.dart';
@@ -53,10 +54,22 @@ class CustomCategoriesList extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return AddCatgeoryItem(
-                              name: cubit.categoriesList[index].name ?? "",
-                              categoryId: cubit.categoriesList[index].id ?? "",
-                              image: cubit.categoriesList[index].image ?? "",
+                            return AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: const Duration(milliseconds: 375),
+
+                              child: ScaleAnimation(
+                                child: FadeInAnimation(
+                                  child: AddCatgeoryItem(
+                                    name:
+                                        cubit.categoriesList[index].name ?? "",
+                                    categoryId:
+                                        cubit.categoriesList[index].id ?? "",
+                                    image:
+                                        cubit.categoriesList[index].image ?? "",
+                                  ),
+                                ),
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) =>
