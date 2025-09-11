@@ -60,6 +60,14 @@ dependencies:
   flutter_offline: ^5.0.0
   cached_network_image: ^3.4.1
   flutter_staggered_animations: ^1.1.1
+  hive: ^2.2.3
+  googleapis_auth: ^2.0.0
+  firebase_messaging: ^16.0.1
+  flutter_local_notifications: ^19.4.1
+  json_serializable: ^6.11.1
+  retrofit_generator: ^10.0.5
+  flutter_dotenv: ^6.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -73,8 +81,6 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   build_runner: ^2.7.0
   freezed_annotation: ^3.1.0
-  retrofit_generator: ^10.0.2
-  json_serializable: ^6.10.0
 
 
 
@@ -104,6 +110,11 @@ flutter:
     - assets/icons/
     - assets/svgs/
     - assets/langs/
+    - .env.dev
+    - .env.prod
+    - assets/notification/shopi-aabfa-93ed54478d1e.json
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

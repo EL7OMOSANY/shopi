@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+
+
+        {
+            "name": "SM M546B",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "RFCW300AS0F"
+
+        },
+        {
+            "name": "Edge",
+            "deviceId": "edge",
+            "request": "launch",
+            "type": "dart",
+        },
+
+
+
+    ],
+    "compounds": [
+        {
+            "name": "All Devices",
+            "configurations": [
+                "SM M546B",
+                "Edge",
+            ]
+        }
+    ]
+}

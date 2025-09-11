@@ -26,59 +26,68 @@ class DashBoardBody extends StatelessWidget {
               cubit.getCategoriesNums();
               cubit.getUsersNums();
             },
-            child: FadeInAnimation(
-              child: ListView(
-                children: [
-                  // Products
-                  BlocBuilder<DashboardCubit, DashboardState>(
-                    buildWhen: (prev, curr) =>
-                        curr is ProductsLoading ||
-                        curr is ProductsLoaded ||
-                        curr is ProductsFailure,
-                    builder: (context, state) {
-                      return DashBoardContiner(
-                        image: AppImages.productsDrawer,
-                        number: state is ProductsLoaded ? state.products : '0',
-                        title: 'Products',
-                        isLoading: state is ProductsLoading,
-                      );
-                    },
+            child: AnimationConfiguration.staggeredList(
+              position: 0,
+              child: ScaleAnimation(
+                duration: const Duration(milliseconds: 500),
+
+                child: FadeInAnimation(
+                  child: ListView(
+                    children: [
+                      // Products
+                      BlocBuilder<DashboardCubit, DashboardState>(
+                        buildWhen: (prev, curr) =>
+                            curr is ProductsLoading ||
+                            curr is ProductsLoaded ||
+                            curr is ProductsFailure,
+                        builder: (context, state) {
+                          return DashBoardContiner(
+                            image: AppImages.productsDrawer,
+                            number: state is ProductsLoaded
+                                ? state.products
+                                : '0',
+                            title: 'Products',
+                            isLoading: state is ProductsLoading,
+                          );
+                        },
+                      ),
+                      AppSpacing.v24,
+                      // Categories
+                      BlocBuilder<DashboardCubit, DashboardState>(
+                        buildWhen: (prev, curr) =>
+                            curr is CategoriesLoading ||
+                            curr is CategoriesLoaded ||
+                            curr is CategoriesFailure,
+                        builder: (context, state) {
+                          return DashBoardContiner(
+                            image: AppImages.categoriesDrawer,
+                            number: state is CategoriesLoaded
+                                ? state.categories
+                                : '0',
+                            title: 'Categories',
+                            isLoading: state is CategoriesLoading,
+                          );
+                        },
+                      ),
+                      AppSpacing.v24,
+                      // Users
+                      BlocBuilder<DashboardCubit, DashboardState>(
+                        buildWhen: (prev, curr) =>
+                            curr is UsersLoading ||
+                            curr is UsersLoaded ||
+                            curr is UsersFailure,
+                        builder: (context, state) {
+                          return DashBoardContiner(
+                            image: AppImages.usersDrawer,
+                            number: state is UsersLoaded ? state.users : '0',
+                            title: 'Users',
+                            isLoading: state is UsersLoading,
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  AppSpacing.v24,
-                  // Categories
-                  BlocBuilder<DashboardCubit, DashboardState>(
-                    buildWhen: (prev, curr) =>
-                        curr is CategoriesLoading ||
-                        curr is CategoriesLoaded ||
-                        curr is CategoriesFailure,
-                    builder: (context, state) {
-                      return DashBoardContiner(
-                        image: AppImages.categoriesDrawer,
-                        number: state is CategoriesLoaded
-                            ? state.categories
-                            : '0',
-                        title: 'Categories',
-                        isLoading: state is CategoriesLoading,
-                      );
-                    },
-                  ),
-                  AppSpacing.v24,
-                  // Users
-                  BlocBuilder<DashboardCubit, DashboardState>(
-                    buildWhen: (prev, curr) =>
-                        curr is UsersLoading ||
-                        curr is UsersLoaded ||
-                        curr is UsersFailure,
-                    builder: (context, state) {
-                      return DashBoardContiner(
-                        image: AppImages.usersDrawer,
-                        number: state is UsersLoaded ? state.users : '0',
-                        title: 'Users',
-                        isLoading: state is UsersLoading,
-                      );
-                    },
-                  ),
-                ],
+                ),
               ),
             ),
           );

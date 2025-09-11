@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
 import 'package:shopi/core/app/upload_image_cubit/repo/upload_image_repo.dart';
@@ -9,6 +10,8 @@ import 'package:shopi/fetures/admin/fetures/category/data/repo/categories_repos.
 import 'package:shopi/fetures/admin/fetures/category/presentation/categories_cubit/cubit/categories_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/data/repo/dashboard_repos.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/cubit/cubit/dashboard_cubit.dart';
+import 'package:shopi/fetures/admin/fetures/notifications/data/repos/notifaction_repos.dart';
+import 'package:shopi/fetures/admin/fetures/notifications/presentation/notification_cubit/cubit/notification_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/products/data/repo/products_repos.dart';
 import 'package:shopi/fetures/admin/fetures/products/presentation/products_cubit/products_cubit.dart';
 import 'package:shopi/fetures/admin/fetures/users/data/repo/users_repos.dart';
@@ -19,6 +22,7 @@ import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.
 
 final GetIt getIt = GetIt.instance;
 GetIt get getItInstance => getIt;
+final navigatorKey = GlobalKey<NavigatorState>();
 
 // Future<void> setupDependencyInjection() async {
 //   // Dio
@@ -47,6 +51,8 @@ Future<void> setupDependencyInjection() async {
   allProductsInit();
 
   allUsersInit();
+
+  notificationsInit();
 }
 
 Future<void> initApp() async {
@@ -114,4 +120,12 @@ Future<void> allUsersInit() async {
 
   getIt.registerFactory<UsersCubit>(() => UsersCubit(getIt()));
   log("✅ UsersCubit registered");
+}
+
+Future<void> notificationsInit() async {
+  getIt.registerLazySingleton<NotifactionRepos>(() => NotifactionRepos());
+  log("✅ NotifactionRepos registered");
+
+  getIt.registerFactory<NotificationCubit>(() => NotificationCubit(getIt()));
+  log("✅ NotificationCubit registered");
 }

@@ -18,6 +18,9 @@ extension ContextExt on BuildContext {
     return AppLocalizations.of(this)!.translate(langkey).toString();
   }
 
+  //global key for navigator
+  GlobalKey<NavigatorState> get navigatorKey => GlobalKey<NavigatorState>();
+
   //Navigation
 
   Future<dynamic> pushName(String routeName, {Object? arguments}) {
