@@ -22,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.maxLines = 1,
     this.textInputAction,
+    this.focusNode,
   });
 
   final String? Function(String?)? validator;
@@ -39,6 +40,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final int? maxLength;
   final int? maxLines;
+  final FocusNode? focusNode;
   //text input action
   final TextInputAction? textInputAction;
 
@@ -47,6 +49,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       cursorColor: context.color.textColor,
+      focusNode: focusNode,
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,

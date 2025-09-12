@@ -5,7 +5,6 @@ import 'package:shopi/core/buutom_sheet/custom_buttom_sheet.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
-import 'package:shopi/core/style/colors/dark_colors.dart';
 import 'package:shopi/core/widgets/custom_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 import 'package:shopi/fetures/admin/fetures/notifications/presentation/notification_cubit/cubit/notification_cubit.dart';
@@ -22,7 +21,7 @@ class CreateNotification extends StatelessWidget {
         // titile
         TextApp(
           text: 'Notifications',
-          style: AppTextStyles.text18w500.copyWith(
+          style: AppTextStyles.text20w400.copyWith(
             color: context.color.textColor,
           ),
         ),
@@ -40,12 +39,12 @@ class CreateNotification extends StatelessWidget {
               },
             );
           },
-          backgroundColor: ColorsDark.blueDark,
-          lastRadius: 10,
-          threeRadius: 10,
+          // ignore: deprecated_member_use
+          backgroundColor: context.color.textFormBorder!.withOpacity(.5),
+          lastRadius: 20,
           text: 'Add',
           width: 90.w,
-          height: 35.h,
+          height: 40.h,
         ),
       ],
     );

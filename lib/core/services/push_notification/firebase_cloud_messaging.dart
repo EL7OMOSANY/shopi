@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:googleapis_auth/auth_io.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
 class FirebaseCloudMessaging {

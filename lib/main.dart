@@ -24,7 +24,6 @@ Future<void> main() async {
   await Firebase.initializeApp();
   String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
 
-  // مثلاً عند تسجيل الدخول:
   if (role == "customer") {
     await FirebaseMessaging.instance.subscribeToTopic("customers");
   } else if (role == "admin") {

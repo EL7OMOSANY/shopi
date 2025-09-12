@@ -153,10 +153,12 @@ class _CreateNotificationBottomSheetState
                         onPressed: () {
                           _validAddNotification(context);
                         },
-                        backgroundColor: ColorsDark.white,
+                        // ignore: deprecated_member_use
+                        backgroundColor: context.color.textFormBorder!
+                            // ignore: deprecated_member_use
+                            .withOpacity(.5),
                         lastRadius: 20,
-                        threeRadius: 20,
-                        textColor: ColorsDark.blueDark,
+                        textColor: ColorsDark.white,
                         text: 'Add a Notification',
                         width: MediaQuery.of(context).size.width,
                         height: 50.h,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/utils/app_logout.dart';
 import 'package:shopi/core/widgets/text_app.dart';
-import 'package:shopi/dialog/dialog.dart';
+import 'package:shopi/core/dialog/dialog.dart';
 import 'package:shopi/fetures/admin/fetures/category/presentation/screens/category_screen.dart';
 import 'package:shopi/fetures/admin/fetures/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:shopi/fetures/admin/fetures/notifications/presentation/screens/notifications_screen.dart';
