@@ -5,9 +5,6 @@ class CustomerHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Customer Home"), centerTitle: true),
-      body: const Text('Customer Home Screen'),
-    );
+    return const Scaffold(body: Center(child: Text('CustomerHomeScreen')));
   }
 }

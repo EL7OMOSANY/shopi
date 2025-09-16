@@ -14,7 +14,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/screen/signup_screen.dart';
-import 'package:shopi/fetures/customer/presentation/screen/customer_home_screen.dart';
+import 'package:shopi/fetures/customer/fetures/categories/presentation/screen/customer_categories_screen.dart';
+import 'package:shopi/fetures/customer/fetures/chart/presentation/screen/customer_chart_screen.dart';
+import 'package:shopi/fetures/customer/fetures/favorits/presentation/screen/customer_favorits_screen.dart';
+import 'package:shopi/fetures/customer/fetures/home/presentation/screen/customer_home_screen.dart';
+import 'package:shopi/fetures/customer/fetures/notifications/presentation/screen/customer_notifications_screen.dart';
+import 'package:shopi/fetures/customer/fetures/profile/presentation/screen/customer_profile_screen.dart';
+import 'package:shopi/fetures/customer/main/presentation/screen/main_screen.dart';
 
 import 'package:shopi/splash_screen.dart';
 
@@ -48,9 +54,39 @@ class AppRouter {
           settings: settings,
         );
 
+      case Routes.customerMain:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerMainScreen(),
+          settings: settings,
+        );
       case Routes.customerHome:
         return CupertinoPageRoute(
           builder: (_) => const CustomerHomeScreen(),
+          settings: settings,
+        );
+      case Routes.customerChart:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerChartScreen(),
+          settings: settings,
+        );
+      case Routes.customerCategories:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerCategoriesScreen(),
+          settings: settings,
+        );
+      case Routes.customerFavorits:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerFavoritsScreen(),
+          settings: settings,
+        );
+      case Routes.customerNotifications:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerNotificationsScreen(),
+          settings: settings,
+        );
+      case Routes.customerProfile:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerProfileScreen(),
           settings: settings,
         );
 

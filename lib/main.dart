@@ -5,7 +5,6 @@ import 'package:shopi/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
-// import 'package:shopi/core/app/env_variables.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/helpers/bloc_observer_helper.dart';
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
@@ -15,13 +14,26 @@ import 'package:shopi/core/services/push_notification/local_notfication_service.
 
 // ignore: strict_top_level_inference
 Future<void> main() async {
+  // initialize widget binding
   WidgetsFlutterBinding.ensureInitialized();
+
+  // initialize bloc observer
   Bloc.observer = AppBlocObserver();
+
+  // initialize dependency injection
   await setupDependencyInjection();
+
+  // initialize shared preferences
   await SharedPref().instantiatePreferences();
+
+  // initialize localization
   await FlutterLocalization.instance.ensureInitialized();
+
+  // initialize firebase
   await Firebase.initializeApp();
   await Firebase.initializeApp();
+
+  // firebase cloud messaging for specific users (admins or customers)
   String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
 
   if (role == "customer") {
@@ -31,6 +43,8 @@ Future<void> main() async {
   }
   await FirebaseMessagingHandler.init();
   await LocalNotificationService.init();
+
+  // initialize hive
   HiveDatabase().setup();
   // await EnvVariable.instance.init(envType: EnvTypeEnum.dev);
   runApp(const Shopi());

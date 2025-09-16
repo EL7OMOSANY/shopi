@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
+import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/utils/toast_utils.dart';
@@ -30,7 +31,6 @@ class SignupButton extends StatelessWidget {
               title: LangKeys.congratulations,
               message: LangKeys.plsSignIn,
             );
-            //////////
 
             String role = getRole(SharedPrefKeys.userRole);
             log(" role in signup button : $role");
@@ -61,6 +61,15 @@ class SignupButton extends StatelessWidget {
                   onPressed: () {
                     if (signupCubit.formKey.currentState!.validate()) {
                       signupCubit.signUp();
+                      //save name and email in shared pref
+                      SharedPref.preferences.setString(
+                        SharedPrefKeys.userName,
+                        signupCubit.nameController.text.trim(),
+                      );
+                      SharedPref.preferences.setString(
+                        SharedPrefKeys.userEmail,
+                        signupCubit.emailController.text.trim(),
+                      );
                     }
                   },
                   child: TextApp(

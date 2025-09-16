@@ -52,7 +52,7 @@ class Shopi extends StatelessWidget {
                     ? Routes.splash
                     : role == 'admin'
                     ? Routes.adminHome
-                    : Routes.customerHome,
+                    : Routes.customerMain,
               );
             },
           );

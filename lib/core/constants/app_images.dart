@@ -20,16 +20,16 @@ class AppImages {
   static const usersDrawer = 'assets/images/admin/users_drawer.png';
 
   //Svg
-  static const search = 'assets/svg/search.svg';
-  static const carShop = 'assets/svg/car_shop.svg';
-  static const homeTab = 'assets/svg/home_tab_icon.svg';
-  static const profileTab = 'assets/svg/profile_tab_icon.svg';
-  static const favouritesTab = 'assets/svg/favourite_tab_icon.svg';
-  static const categoriesTab = 'assets/svg/categories_tap_icon.svg';
-  static const darkMode = 'assets/svg/dark_mode.svg';
-  static const language = 'assets/svg/language.svg';
-  static const buildVersion = 'assets/svg/build_version.svg';
-  static const buildDeveloper = 'assets/svg/build_developer.svg';
-  static const logout = 'assets/svg/logout.svg';
-  static const backButton = 'assets/svg/arrow_back.svg';
+  static const search = 'assets/svgs/search.svg';
+  static const carShop = 'assets/svgs/car_shop.svg';
+  static const homeTab = 'assets/svgs/home_tab_icon.svg';
+  static const profileTab = 'assets/svgs/profile_tab_icon.svg';
+  static const favouritesTab = 'assets/svgs/favourite_tab_icon.svg';
+  static const categoriesTab = 'assets/svgs/categories_tap_icon.svg';
+  static const darkMode = 'assets/svgs/dark_mode.svg';
+  static const language = 'assets/svgs/language.svg';
+  static const buildVersion = 'assets/svgs/build_version.svg';
+  static const buildDeveloper = 'assets/svgs/build_developer.svg';
+  static const logout = 'assets/svgs/logout.svg';
+  static const backButton = 'assets/svgs/arrow_back.svg';
 }

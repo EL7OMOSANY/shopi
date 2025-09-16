@@ -67,6 +67,7 @@ dependencies:
   json_serializable: ^6.11.1
   retrofit_generator: ^10.0.5
   flutter_dotenv: ^6.0.0
+  flutter_animate: ^4.5.2
 
 
 dev_dependencies:
@@ -106,6 +107,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/admin/
+    - assets/images/customer/
     - assets/images/core/def_user.png
     - assets/icons/
     - assets/svgs/

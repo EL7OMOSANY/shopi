@@ -20,19 +20,19 @@ class ImagePick {
   Future<void> saveImage([String? imagePath]) async {
     final pathToSave = imagePath ?? image?.path;
     if (pathToSave != null) {
-      await SharedPref().setString(SharedPrefKeys.imagePath, pathToSave);
+      await SharedPref().setString(SharedPrefKeys.userImage, pathToSave);
     }
   }
 
   //Load image
-  Future<String> loadImage() async {
-    final storedPath = SharedPref().getString(SharedPrefKeys.imagePath);
+  Future<String> loadProfileImage() async {
+    final storedPath = SharedPref().getString(SharedPrefKeys.userImage);
     return storedPath ?? '';
   }
 
   //Clear image
   Future<void> clearImage() async {
-    await SharedPref().removePreference(SharedPrefKeys.imagePath);
+    await SharedPref().removePreference(SharedPrefKeys.userImage);
   }
 
   //Show image source dialog

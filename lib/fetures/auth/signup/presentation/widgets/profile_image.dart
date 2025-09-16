@@ -12,7 +12,7 @@ class ProfileImage extends StatefulWidget {
 }
 
 class _ProfileImageState extends State<ProfileImage> {
-  String? imagePath; // null يعني مفيش صورة لسه
+  String? imagePath;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _ProfileImageState extends State<ProfileImage> {
   }
 
   Future<void> _loadSavedImage() async {
-    final path = await ImagePick().loadImage();
+    final path = await ImagePick().loadProfileImage();
     setState(() {
       imagePath = path;
     });
