@@ -1,7 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
+import 'package:shopi/core/constants/shared_pref_keys.dart';
+import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/utils/image_pick.dart';
 
 class ProfileImage extends StatefulWidget {
@@ -42,6 +45,9 @@ class _ProfileImageState extends State<ProfileImage> {
               setState(() {
                 imagePath = pickedFile.path;
               });
+              log(
+                "Image path in shared pref: ${SharedPref().getString(SharedPrefKeys.userImage)}",
+              );
             }
           }
         },

@@ -7,14 +7,14 @@ class SignUpRequest {
   SignUpRequest({
     required this.email,
     required this.password,
-    required this.avatar,
     required this.name,
   });
 
   final String name;
   final String email;
   final String password;
-  final String avatar;
+  final String avatar =
+      "com.example.shopi/cache/eeba4ee0-4061-4da1-af56-a4d399dba2f6/1000407625.png";
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
       _$SignUpRequestFromJson(json);

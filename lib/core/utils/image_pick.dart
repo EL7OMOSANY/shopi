@@ -13,7 +13,24 @@ class ImagePick {
   //Set image
   Future<XFile?> setImage(ImageSource source) async {
     image = await ImagePicker().pickImage(source: source);
+
+    if (image != null) {
+      imagePathToApiAvater(image);
+    }
+
     return image;
+  }
+
+  String imagePathToApiAvater(XFile? image) {
+    String fullPath = image!.path;
+    // هنا هنقص الجزء اللي قبل "com.example.shopi"
+    String relativePath = fullPath.split("com.example.shopi").last;
+    relativePath = "com.example.shopi$relativePath";
+
+    debugPrint("Full path: $fullPath");
+    debugPrint("Relative path: $relativePath");
+
+    return relativePath;
   }
 
   //Save image

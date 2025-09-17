@@ -19,6 +19,7 @@ import 'package:shopi/fetures/admin/fetures/users/presentation/users_cubit/cubit
 import 'package:shopi/fetures/auth/auth_repos/auth_repos.dart';
 import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
+import 'package:shopi/fetures/customer/fetures/profile/presentation/cubit/cubit/customer_profile_cubit.dart';
 import 'package:shopi/fetures/customer/main/presentation/main%20cubit/cubit/main_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -136,4 +137,9 @@ Future<void> notificationsInit() async {
 Future<void> customerInit() async {
   getIt.registerFactory<MainCubit>(() => MainCubit());
   log("✅ MainCubit registered");
+
+  getIt.registerFactory<CustomerProfileCubit>(
+    () => CustomerProfileCubit(getIt()),
+  );
+  log("✅ CustomerProfileCubit registered");
 }

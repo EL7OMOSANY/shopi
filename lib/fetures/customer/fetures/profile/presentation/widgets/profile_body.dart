@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopi/core/animations/animate_do.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
-import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
-import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
 import 'package:shopi/core/widgets/text_app.dart';
+import 'package:shopi/fetures/customer/fetures/profile/presentation/cubit/cubit/customer_profile_cubit.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/build_developer.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/build_version.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/dark_mode_change.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/language_change.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/logout_widget.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/user_profile_info.dart';
+import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/user_profile_shimmer.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key});
@@ -26,17 +27,19 @@ class ProfileBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //User Profile Info
-            Center(
-              child: UserProfileInfo(
-                userImage:
-                    SharedPref().getString(SharedPrefKeys.userImage) ??
-                    "assets/images/core/def_user.png",
-                userName:
-                    SharedPref().getString(SharedPrefKeys.userName) ?? "User",
-                userEmail:
-                    SharedPref().getString(SharedPrefKeys.userEmail) ??
-                    "User@gmail.com",
-              ),
+            BlocBuilder<CustomerProfileCubit, CustomerProfileState>(
+              builder: (context, state) {
+                final cubit = context.read<CustomerProfileCubit>();
+                return state is CustomerProfileLoading
+                    ? Center(child: Center(child: UserProfileShimmer()))
+                    : Center(
+                        child: UserProfileInfo(
+                          userName: cubit.userinfo.userName ?? "User",
+                          userEmail:
+                              cubit.userinfo.userEmail ?? "User@gmail.com",
+                        ),
+                      );
+              },
             ),
 
             //title

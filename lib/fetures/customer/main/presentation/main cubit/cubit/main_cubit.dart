@@ -19,6 +19,8 @@ class MainCubit extends Cubit<MainState> {
       selectedNavBar = NavBarEnum.chart;
     } else if (navBarEnum == NavBarEnum.favorites) {
       selectedNavBar = NavBarEnum.favorites;
+    } else if (navBarEnum == NavBarEnum.catgeories) {
+      selectedNavBar = NavBarEnum.catgeories;
     }
 
     emit(IsSelectedIconState(navBarEnum: selectedNavBar));

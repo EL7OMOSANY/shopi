@@ -70,6 +70,16 @@ class AuthRepos {
       response.userRole ?? '',
     );
 
+    await SharedPref().setString(
+      SharedPrefKeys.userName,
+      response.userName ?? 'User',
+    );
+
+    await SharedPref().setString(
+      SharedPrefKeys.userEmail,
+      response.userEmail ?? 'User@gmail.com',
+    );
+
     return response;
   }
 

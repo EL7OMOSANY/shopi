@@ -14,10 +14,20 @@ import 'package:shopi/fetures/customer/main/presentation/main%20cubit/cubit/main
 
 class MainCustomerAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const MainCustomerAppBar({super.key});
+  const MainCustomerAppBar({
+    super.key,
+    this.showAppBar = true, // البولين الافتراضي
+  });
+
+  final bool showAppBar;
 
   @override
   Widget build(BuildContext context) {
+    if (!showAppBar) {
+      // لو مش عايز الأوب بار، هرجع Container فاضي
+      return const SizedBox.shrink();
+    }
+
     final cubit = context.read<MainCubit>();
     return AppBar(
       automaticallyImplyLeading: false,
@@ -30,7 +40,7 @@ class MainCustomerAppBar extends StatelessWidget
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomFadeInRight(
+                CustomFadeInLeft(
                   duration: 800,
                   child: TextApp(
                     text: context.tr(LangKeys.chooseProducts),
@@ -39,7 +49,7 @@ class MainCustomerAppBar extends StatelessWidget
                     ),
                   ),
                 ),
-                CustomFadeInLeft(
+                CustomFadeInRight(
                   duration: 800,
                   child: CustomLinearButton(
                     onPressed: () {
@@ -70,13 +80,14 @@ class MainCustomerAppBar extends StatelessWidget
                 ),
               ),
             );
+          } else {
+            return const SizedBox.shrink();
           }
-          return const SizedBox.shrink();
         },
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size(double.infinity, 70.h);
+  Size get preferredSize => Size(double.infinity, showAppBar ? 70.h : 0);
 }

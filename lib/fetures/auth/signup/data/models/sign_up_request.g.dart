@@ -10,7 +10,6 @@ SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
     SignUpRequest(
       email: json['email'] as String,
       password: json['password'] as String,
-      avatar: json['avatar'] as String,
       name: json['name'] as String,
     );
 

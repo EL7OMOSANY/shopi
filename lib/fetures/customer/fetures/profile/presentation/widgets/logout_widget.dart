@@ -49,7 +49,7 @@ class LogOutWidget extends StatelessWidget {
             children: [
               TextApp(
                 text: context.tr(LangKeys.logOut).toLowerCase(),
-                style: AppTextStyles.text14w400.copyWith(color: Colors.red),
+                style: AppTextStyles.text18w400.copyWith(color: Colors.red),
               ),
               SizedBox(width: 5.w),
               Icon(Icons.arrow_forward_ios, color: Colors.red, size: 15),

@@ -11,6 +11,7 @@ import 'package:shopi/fetures/customer/fetures/profile/presentation/screen/custo
 import 'package:shopi/fetures/customer/main/presentation/main%20cubit/cubit/main_cubit.dart';
 import 'package:shopi/fetures/customer/main/presentation/widgets/bottom_nav_bar.dart';
 import 'package:shopi/fetures/customer/main/presentation/widgets/main_customer_app_bar.dart';
+// import 'package:shopi/fetures/customer/main/presentation/widgets/main_customer_app_bar.dart';
 
 class CustomerMainScreen extends StatelessWidget {
   const CustomerMainScreen({super.key});

@@ -117,8 +117,8 @@ class MainBottomNavBar extends StatelessWidget {
               ),
               //Car Icon
               Positioned(
-                left: 35,
-                top: 17,
+                left: 33,
+                top: 14,
                 child: SvgPicture.asset(
                   AppImages.carShop,
                   color: Colors.white,
