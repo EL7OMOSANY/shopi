@@ -5,6 +5,7 @@ import 'package:shopi/core/constants/app_images.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
+import 'package:shopi/core/utils/app_info.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 
 class BuildVersion extends StatelessWidget {
@@ -27,24 +28,23 @@ class BuildVersion extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        //Build Version
 
-        // FutureBuilder<String>(
-        //   future: AppInfo.getAppVersion(context),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       return TextApp(
-        //         text: snapshot.data.toString(),
-        //         theme: context.textStyle.copyWith(
-        //           fontSize: 16.sp,
-        //           fontWeight: FontWeightHelper.regular,
-        //         ),
-        //       );
-        //     } else {
-        //       return const SizedBox.shrink();
-        //     }
-        //   },
-        // ),
+        //Build Version
+        FutureBuilder<String>(
+          future: AppInfo.getAppVersion(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return TextApp(
+                text: snapshot.data.toString(),
+                style: AppTextStyles.text16w500.copyWith(
+                  color: context.color.textColor,
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
       ],
     );
   }

@@ -19,6 +19,11 @@ import 'package:shopi/fetures/admin/fetures/users/presentation/users_cubit/cubit
 import 'package:shopi/fetures/auth/auth_repos/auth_repos.dart';
 import 'package:shopi/fetures/auth/login/presentaion/login_cubit/login_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
+import 'package:shopi/fetures/customer/fetures/home/data/repo/banners_repo.dart';
+import 'package:shopi/fetures/customer/fetures/home/presentation/cubit/cubit/customer_home_cubit.dart';
+import 'package:shopi/fetures/customer/fetures/product_details/data/repos/customer_product_details_repo.dart';
+import 'package:shopi/fetures/customer/fetures/product_details/presentation/cubit/customer_product_details_cubit.dart';
+import 'package:shopi/fetures/customer/fetures/products_view_all/data/repos/products_view_all_repo.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/cubit/cubit/customer_profile_cubit.dart';
 import 'package:shopi/fetures/customer/main/presentation/main%20cubit/cubit/main_cubit.dart';
 
@@ -57,6 +62,8 @@ Future<void> setupDependencyInjection() async {
   notificationsInit();
 
   customerInit();
+
+  customerHomeInit();
 }
 
 Future<void> initApp() async {
@@ -142,4 +149,29 @@ Future<void> customerInit() async {
     () => CustomerProfileCubit(getIt()),
   );
   log("✅ CustomerProfileCubit registered");
+}
+
+// customer home init
+
+Future<void> customerHomeInit() async {
+  getIt.registerFactory<CustomerHomeRepos>(() => CustomerHomeRepos(getIt()));
+  log("✅ CustomerHomeRepos registered");
+
+  getIt.registerFactory<CustomerHomeCubit>(() => CustomerHomeCubit(getIt()));
+  log("✅ CustomerHomeCubit registered");
+
+  getIt.registerFactory<ProductsViewAllRepo>(
+    () => ProductsViewAllRepo(getIt()),
+  );
+  log("✅ ProductsViewAllRepo registered");
+
+  getIt.registerFactory<CustomerProductDetailsRepo>(
+    () => CustomerProductDetailsRepo(getIt()),
+  );
+  log("✅ CustomerProductDetailsRepo registered");
+
+  getIt.registerFactory<CustomerProductDetailsCubit>(
+    () => CustomerProductDetailsCubit(getIt()),
+  );
+  log("✅ CustomerProductDetailsCubit registered");
 }

@@ -12,7 +12,6 @@ import 'package:shopi/core/services/hive/hive_database.dart';
 import 'package:shopi/core/services/push_notification/firebase_messaging_handeler.dart';
 import 'package:shopi/core/services/push_notification/local_notfication_service.dart';
 
-// ignore: strict_top_level_inference
 Future<void> main() async {
   // initialize widget binding
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +45,5 @@ Future<void> main() async {
 
   // initialize hive
   HiveDatabase().setup();
-  // await EnvVariable.instance.init(envType: EnvTypeEnum.dev);
   runApp(const Shopi());
 }

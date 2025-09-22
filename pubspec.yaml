@@ -68,6 +68,9 @@ dependencies:
   retrofit_generator: ^10.0.5
   flutter_dotenv: ^6.0.0
   flutter_animate: ^4.5.2
+  webview_flutter: ^4.13.0
+  package_info_plus: ^9.0.0
+  carousel_slider: ^5.1.1
 
 
 dev_dependencies:
@@ -115,6 +118,7 @@ flutter:
     - .env.dev
     - .env.prod
     - assets/notification/shopi-aabfa-93ed54478d1e.json
+    - assets/images/core/empty_screen.png
 
 
 

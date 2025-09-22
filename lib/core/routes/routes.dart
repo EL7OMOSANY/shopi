@@ -16,4 +16,8 @@ class Routes {
   static const String customerFavorits = '/customerFavorits';
   static const String customerChart = '/customerChart';
   static const String customerCategories = '/customerCategories';
+  static const String webView = '/webView';
+  static const String customerProductDetails = '/customerProductDetails';
+  static const String productsViewAll = '/productsViewAll';
+  static const String customerSeeAllProducts = '/customerSeeAllProducts';
 }

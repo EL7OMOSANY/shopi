@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [context.color.navBarbg!, context.color.textFormBorder!],
+            colors: [context.color.textFormBorder!, context.color.navBarbg!],
             center: Alignment.center, // تبقى من النص
             radius: 1.0, // كل ما تزود الرقم الدائرة تكبر
             tileMode: TileMode.mirror, // يخليها زي دوريات متكررة

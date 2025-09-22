@@ -17,94 +17,39 @@ class MainBottomNavBar extends StatelessWidget {
     return CustomFadeInUp(
       duration: 800,
       child: Align(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
+        alignment: Alignment.center,
+        child: Container(
+          decoration: BoxDecoration(),
           height: 80.h,
           width: MediaQuery.of(context).size.width,
           child: Stack(
+            alignment: Alignment.center,
             children: [
-              // Icons
-              Column(
-                children: [
-                  Container(
-                    height: 80.h,
-                    color: context.color.navBarbg,
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: SizedBox(
-                        height: 80.h,
-                        width: 300.w,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: BlocBuilder<MainCubit, MainState>(
-                            builder: (context, state) {
-                              final cubit = context.read<MainCubit>();
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  //Home Screen
-                                  IconTapNavBar(
-                                    icon: AppImages.homeTab,
-                                    isSelected:
-                                        cubit.selectedNavBar == NavBarEnum.home,
-                                    onTap: () {
-                                      cubit.selectNavBarIcon(
-                                        navBarEnum: NavBarEnum.home,
-                                      );
-                                    },
-                                  ),
-                                  //Categories Screen
-                                  IconTapNavBar(
-                                    icon: AppImages.categoriesTab,
-                                    isSelected:
-                                        cubit.selectedNavBar ==
-                                        NavBarEnum.catgeories,
-                                    onTap: () {
-                                      cubit.selectNavBarIcon(
-                                        navBarEnum: NavBarEnum.catgeories,
-                                      );
-                                    },
-                                  ),
-                                  //Favourites Screen
-                                  IconTapNavBar(
-                                    icon: AppImages.favouritesTab,
-                                    isSelected:
-                                        cubit.selectedNavBar ==
-                                        NavBarEnum.favorites,
-                                    onTap: () {
-                                      cubit.selectNavBarIcon(
-                                        navBarEnum: NavBarEnum.favorites,
-                                      );
-                                    },
-                                  ),
-                                  //Profile Screen
-                                  IconTapNavBar(
-                                    icon: AppImages.profileTab,
-                                    isSelected:
-                                        cubit.selectedNavBar ==
-                                        NavBarEnum.profile,
-                                    onTap: () {
-                                      cubit.selectNavBarIcon(
-                                        navBarEnum: NavBarEnum.profile,
-                                      );
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
+              // NavBar background
+              Container(
+                height: 80.h,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: context.color.textFormBorder!,
+                    width: 2.5.w,
                   ),
-                ],
+
+                  gradient: LinearGradient(
+                    colors: [
+                      context.color.navBarbg!,
+                      // ignore: deprecated_member_use
+                      context.color.textFormBorder!.withOpacity(0.5),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(30.r)),
+                ),
               ),
 
-              // BackGround Icon
+              // BackGround Icon (in center)
               Positioned(
-                top: -12,
-                left: -8,
+                top: -5, // مرفوع فوق شوية
                 child: Container(
                   height: 100.h,
                   width: 100.w,
@@ -115,14 +60,88 @@ class MainBottomNavBar extends StatelessWidget {
                   ),
                 ),
               ),
-              //Car Icon
+
+              // Car Icon (centered on top of background)
               Positioned(
-                left: 33,
-                top: 14,
+                top: 18.h, // مرفوع فوق شوية
                 child: SvgPicture.asset(
                   AppImages.carShop,
+                  // ignore: deprecated_member_use
                   color: Colors.white,
-                  height: 20.h,
+                  height: 25.h,
+                ),
+              ),
+
+              // Icons Row
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: BlocBuilder<MainCubit, MainState>(
+                  builder: (context, state) {
+                    final cubit = context.read<MainCubit>();
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // 2 Icons Left
+                          Row(
+                            children: [
+                              IconTapNavBar(
+                                icon: AppImages.homeTab,
+                                isSelected:
+                                    cubit.selectedNavBar == NavBarEnum.home,
+                                onTap: () {
+                                  cubit.selectNavBarIcon(
+                                    navBarEnum: NavBarEnum.home,
+                                  );
+                                },
+                              ),
+                              SizedBox(width: 45.w),
+                              IconTapNavBar(
+                                icon: AppImages.categoriesTab,
+                                isSelected:
+                                    cubit.selectedNavBar ==
+                                    NavBarEnum.catgeories,
+                                onTap: () {
+                                  cubit.selectNavBarIcon(
+                                    navBarEnum: NavBarEnum.catgeories,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+
+                          // 2 Icons Right
+                          Row(
+                            children: [
+                              IconTapNavBar(
+                                icon: AppImages.favouritesTab,
+                                isSelected:
+                                    cubit.selectedNavBar ==
+                                    NavBarEnum.favorites,
+                                onTap: () {
+                                  cubit.selectNavBarIcon(
+                                    navBarEnum: NavBarEnum.favorites,
+                                  );
+                                },
+                              ),
+                              SizedBox(width: 45.w),
+                              IconTapNavBar(
+                                icon: AppImages.profileTab,
+                                isSelected:
+                                    cubit.selectedNavBar == NavBarEnum.profile,
+                                onTap: () {
+                                  cubit.selectNavBarIcon(
+                                    navBarEnum: NavBarEnum.profile,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

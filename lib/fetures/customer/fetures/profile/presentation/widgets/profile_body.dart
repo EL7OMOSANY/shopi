@@ -12,6 +12,7 @@ import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/buil
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/dark_mode_change.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/language_change.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/logout_widget.dart';
+import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/notifications_change.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/user_profile_info.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/widgets/user_profile_shimmer.dart';
 
@@ -63,12 +64,12 @@ class ProfileBody extends StatelessWidget {
             // Build Developer
             const CustomFadeInRight(duration: 400, child: BuildDeveloper()),
             SizedBox(height: 20.h),
-            // Notifications change
-            // const CustomFadeInRight(
-            //   duration: 400,
-            //   child: NotificationsChange(),
-            // ),
-            // SizedBox(height: 20.h),
+            // Notifications
+            const CustomFadeInRight(
+              duration: 400,
+              child: NotificationsChange(),
+            ),
+            SizedBox(height: 20.h),
             // Build Version
             const CustomFadeInRight(duration: 400, child: BuildVersion()),
             SizedBox(height: 20.h),

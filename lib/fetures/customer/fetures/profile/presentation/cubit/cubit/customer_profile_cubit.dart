@@ -13,7 +13,13 @@ class CustomerProfileCubit extends Cubit<CustomerProfileState> {
 
   final AuthRepos _repo;
 
-  UserRoleResponse userinfo = UserRoleResponse('', 0, '', '', "");
+  UserRoleResponse userinfo = UserRoleResponse(
+    'customer',
+    0,
+    'User@gmail.com',
+    'User',
+    "assets/images/core/def_user.png",
+  );
 
   Future<void> getUserInfo() async {
     emit(CustomerProfileLoading());
@@ -22,7 +28,6 @@ class CustomerProfileCubit extends Cubit<CustomerProfileState> {
       final response = await _repo.userRole(token);
 
       userinfo = response;
-      log("✅ User info: $userinfo");
       emit(CustomerProfileSuccess(userinfo: response));
     } catch (error) {
       log("❌ Get user info error: $error");

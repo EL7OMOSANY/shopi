@@ -22,9 +22,11 @@ class IconTapNavBar extends StatelessWidget {
       child:
           SvgPicture.asset(
                 icon,
+                // ignore: deprecated_member_use
                 color: isSelected
-                    ? context.color.navBarSelectedTab
-                    : Colors.grey,
+                    // ignore: deprecated_member_use
+                    ? context.color.bluePinkLight!.withOpacity(.9)
+                    : context.color.textColor,
                 height: 25.h,
               )
               .animate(target: isSelected ? 1 : 0)

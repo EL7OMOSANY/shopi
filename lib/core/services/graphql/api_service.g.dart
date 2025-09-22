@@ -318,6 +318,29 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<BannersResponse> getBanners(Map<String, dynamic> query) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<BannersResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+              _dio.options,
+              '/graphql',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
+    final value = BannersResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetAllProductsResponse> getAllProduct(
     Map<String, dynamic> query,
   ) async {
@@ -443,6 +466,56 @@ class _ApiService implements ApiService {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<CustomerProductDetailsResponse> productDetails(
+    Map<String, dynamic> query,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<CustomerProductDetailsResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+              _dio.options,
+              '/graphql',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
+    final value = CustomerProductDetailsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetAllProductsResponse> getProductsViewAll(
+    Map<String, dynamic> query,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<GetAllProductsResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+              _dio.options,
+              '/graphql',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
+    final value = GetAllProductsResponse.fromJson(_result.data!);
+    return value;
   }
 
   @override

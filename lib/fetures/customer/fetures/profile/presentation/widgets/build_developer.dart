@@ -5,6 +5,7 @@ import 'package:shopi/core/constants/app_images.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
+import 'package:shopi/core/routes/routes.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 
 class BuildDeveloper extends StatelessWidget {
@@ -27,14 +28,13 @@ class BuildDeveloper extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        //language button
         InkWell(
           onTap: () {
             //Open Web View
-            // context.pushName(
-            //   Routes.webview,
-            //   arguments: EnvVariable.instance.buildDeveloper,
-            // );
+            context.pushName(
+              Routes.webView,
+              arguments: "https://el7omosany.github.io/about_me/",
+            );
           },
           child: Row(
             children: [

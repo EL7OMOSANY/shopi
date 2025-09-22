@@ -45,63 +45,75 @@ class _UserProfileInfoState extends State<UserProfileInfo> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Stack(
+        Row(
           children: [
-            CircleAvatar(
-              radius: 60.r,
-              backgroundImage:
-                  userImagePath != null && userImagePath!.isNotEmpty
-                  ? FileImage(File(userImagePath!))
-                  : const AssetImage("assets/images/default_user.png")
-                        as ImageProvider,
-            ),
-            Positioned(
-              bottom: 0,
-              right: 4,
-              child: GestureDetector(
-                onTap: () async {
-                  final source = await ImagePick().showImageSourceDialog(
-                    context,
-                  );
-
-                  if (source != null) {
-                    final pickedFile = await ImagePick().setImage(source);
-                    if (pickedFile != null) {
-                      await ImagePick().saveImage(pickedFile.path);
-                      setState(() {
-                        userImagePath = pickedFile.path;
-                      });
-                      log(
-                        "Image path in shared pref: ${SharedPref().getString(SharedPrefKeys.userImage)}",
-                      );
-                    }
-                  }
-                },
-                child: CircleAvatar(
-                  radius: 15.r,
-                  // ignore: deprecated_member_use
-                  backgroundColor: context.color.textColor!.withOpacity(0.8),
-                  child: Icon(Icons.edit, color: Colors.white, size: 20.sp),
+            Stack(
+              children: [
+                CircleAvatar(
+                  radius: 60.r,
+                  backgroundImage:
+                      userImagePath != null && userImagePath!.isNotEmpty
+                      ? FileImage(File(userImagePath!))
+                      : const AssetImage("assets/images/core/def_user.png")
+                            as ImageProvider,
                 ),
-              ),
+                Positioned(
+                  bottom: 0,
+                  right: 4,
+                  child: GestureDetector(
+                    onTap: () async {
+                      final source = await ImagePick().showImageSourceDialog(
+                        context,
+                      );
+
+                      if (source != null) {
+                        final pickedFile = await ImagePick().setImage(source);
+                        if (pickedFile != null) {
+                          await ImagePick().saveImage(pickedFile.path);
+                          setState(() {
+                            userImagePath = pickedFile.path;
+                          });
+                          log(
+                            "Image path in shared pref: ${SharedPref().getString(SharedPrefKeys.userImage)}",
+                          );
+                        }
+                      }
+                    },
+                    child: CircleAvatar(
+                      radius: 15.r,
+                      // ignore: deprecated_member_use
+                      backgroundColor: context.color.textColor!.withOpacity(
+                        0.8,
+                      ),
+                      child: Icon(Icons.edit, color: Colors.white, size: 20.sp),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            AppSpacing.h24,
+            Column(
+              children: [
+                AppSpacing.v16,
+                TextApp(
+                  text: widget.userName.toLowerCase().toCapitalized(),
+                  style: AppTextStyles.text24w400.copyWith(
+                    color: context.color.textColor,
+                  ),
+                ),
+                AppSpacing.v8,
+                TextApp(
+                  text: widget.userEmail,
+                  style: AppTextStyles.text18w400.copyWith(
+                    color: context.color.textColor,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
         AppSpacing.v16,
-        TextApp(
-          text: widget.userName.toLowerCase().toCapitalized(),
-          style: AppTextStyles.text24w400.copyWith(
-            color: context.color.textColor,
-          ),
-        ),
-        AppSpacing.v8,
-        TextApp(
-          text: widget.userEmail,
-          style: AppTextStyles.text18w400.copyWith(
-            color: context.color.textColor,
-          ),
-        ),
-        AppSpacing.v8,
         Divider(
           color: context.color.textColor,
           thickness: .5.w,
