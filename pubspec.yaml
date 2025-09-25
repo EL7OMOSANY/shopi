@@ -71,6 +71,8 @@ dependencies:
   webview_flutter: ^4.13.0
   package_info_plus: ^9.0.0
   carousel_slider: ^5.1.1
+  app_links: ^6.4.1
+  share_plus: ^12.0.0
 
 
 dev_dependencies:

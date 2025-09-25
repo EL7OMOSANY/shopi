@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/di/di.dart';
 import 'package:shopi/core/enums/nav_bar_enums.dart';
-
-import 'package:shopi/fetures/customer/fetures/favorits/presentation/screen/customer_favorits_screen.dart';
+import 'package:shopi/fetures/customer/fetures/categories/presentation/screen/customer_categories_screen.dart';
+import 'package:shopi/fetures/customer/fetures/favorits/presentation/screen/customer_favorites_screen.dart';
 import 'package:shopi/fetures/customer/fetures/home/presentation/screen/customer_home_screen.dart';
 import 'package:shopi/fetures/customer/fetures/notifications/presentation/screen/customer_notifications_screen.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/screen/customer_profile_screen.dart';
@@ -33,6 +33,8 @@ class CustomerMainScreen extends StatelessWidget {
                     return const CustomerFavoritsScreen();
                   } else if (cubit.selectedNavBar == NavBarEnum.profile) {
                     return const CustomerProfileScreen();
+                  } else if (cubit.selectedNavBar == NavBarEnum.catgeories) {
+                    return const CustomerCategoriesScreen();
                   } else {
                     return const CustomerHomeScreen();
                   }

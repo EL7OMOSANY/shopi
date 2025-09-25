@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shopi/fetures/admin/fetures/category/data/models/get_all_categories_response.dart';
 import 'package:shopi/fetures/customer/fetures/home/presentation/widgets/categories/customer_catgeory_item.dart';
 
@@ -18,10 +19,18 @@ class CustomerCategoriesList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: categoreisList.length,
           itemBuilder: (context, index) {
-            return CustomerCategoryItem(
-              image: categoreisList[index].image ?? '',
-              title: categoreisList[index].name ?? '',
-              id: int.parse(categoreisList[index].id ?? '0'),
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              duration: const Duration(milliseconds: 500),
+              child: ScaleAnimation(
+                child: FadeInAnimation(
+                  child: CustomerCategoryItem(
+                    image: categoreisList[index].image ?? '',
+                    title: categoreisList[index].name ?? '',
+                    id: int.parse(categoreisList[index].id ?? '0'),
+                  ),
+                ),
+              ),
             );
           },
           separatorBuilder: (context, index) => SizedBox(width: 15.w),

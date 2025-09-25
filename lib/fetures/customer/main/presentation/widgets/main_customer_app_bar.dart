@@ -8,6 +8,7 @@ import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/enums/nav_bar_enums.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/langs/lang_keys.dart';
+import 'package:shopi/core/routes/routes.dart';
 import 'package:shopi/core/widgets/custom_linear_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 import 'package:shopi/fetures/customer/main/presentation/main%20cubit/cubit/main_cubit.dart';
@@ -53,7 +54,7 @@ class MainCustomerAppBar extends StatelessWidget
                   duration: 800,
                   child: CustomLinearButton(
                     onPressed: () {
-                      // context.pushName(Routes.search);
+                      context.pushName(Routes.customerSearch);
                     },
                     child: Center(child: SvgPicture.asset(AppImages.search)),
                   ),
@@ -61,7 +62,7 @@ class MainCustomerAppBar extends StatelessWidget
               ],
             );
           } else if (cubit.selectedNavBar == NavBarEnum.favorites) {
-            return CustomFadeInRight(
+            return CustomFadeInLeft(
               duration: 800,
               child: TextApp(
                 text: 'Your Favorite',
@@ -70,8 +71,18 @@ class MainCustomerAppBar extends StatelessWidget
                 ),
               ),
             );
+          } else if (cubit.selectedNavBar == NavBarEnum.catgeories) {
+            return CustomFadeInLeft(
+              duration: 800,
+              child: TextApp(
+                text: 'Your Categories',
+                style: AppTextStyles.text20w700.copyWith(
+                  color: context.color.textColor,
+                ),
+              ),
+            );
           } else if (cubit.selectedNavBar == NavBarEnum.notifications) {
-            return CustomFadeInRight(
+            return CustomFadeInLeft(
               duration: 800,
               child: TextApp(
                 text: 'Notifications',

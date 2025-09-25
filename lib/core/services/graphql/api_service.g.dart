@@ -519,6 +519,31 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<GetAllProductsResponse> getProductsByCategoryId(
+    Map<String, dynamic> query,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<GetAllProductsResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+              _dio.options,
+              '/graphql',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
+    final value = GetAllProductsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<void> deleteUser(Map<String, dynamic> mutation) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -549,6 +574,31 @@ class _ApiService implements ApiService {
       }
     }
     return requestOptions;
+  }
+
+  @override
+  Future<GetAllProductsResponse> searchProduct(
+    Map<String, dynamic> query,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(query);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<GetAllProductsResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+              _dio.options,
+              '/graphql',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
+    final value = GetAllProductsResponse.fromJson(_result.data!);
+    return value;
   }
 
   String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {

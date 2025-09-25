@@ -6,7 +6,6 @@
     "configurations": [
 
 
-
         {
             "name": "SM M546B",
             "request": "launch",
@@ -15,8 +14,8 @@
 
         },
         {
-            "name": "Edge",
-            "deviceId": "edge",
+            "name": "sdk gphone64 x86 64",
+            "deviceId": "emulator-5554",
             "request": "launch",
             "type": "dart",
         },
@@ -29,7 +28,7 @@
             "name": "All Devices",
             "configurations": [
                 "SM M546B",
-                "Edge",
+                "sdk gphone64 x86 64",
             ]
         }
     ]

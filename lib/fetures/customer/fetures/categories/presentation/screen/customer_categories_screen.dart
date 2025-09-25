@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shopi/core/widgets/custom_app_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopi/core/di/di.dart';
+import 'package:shopi/fetures/admin/fetures/category/presentation/categories_cubit/cubit/categories_cubit.dart';
+import 'package:shopi/fetures/customer/fetures/categories/presentation/widgets/customer_categories_body.dart';
 
 class CustomerCategoriesScreen extends StatelessWidget {
-  const CustomerCategoriesScreen({super.key, required this.categoryInfo});
+  const CustomerCategoriesScreen({super.key});
 
-  final ({String categoryName, int categoryId}) categoryInfo;
   @override
   Widget build(BuildContext context) {
-    return
-    // BlocProvider(
-    //   create: (context) => sl<GetCategoryBloc>()
-    //     ..add(
-    //       GetCategoryEvent.getCategory(categoryId: categoryInfo.categoryId),
-    //     ),
-    //   child:
-    Scaffold(
-      appBar: CustomAppBar(title: categoryInfo.categoryName),
-      //   body: const CategoryBody(),
-      // ),
+    return BlocProvider(
+      create: (context) => getIt<CategoriesCubit>()..getAllCategories(),
+      child: Scaffold(body: const CustomerCategoriesBody()),
     );
   }
 }

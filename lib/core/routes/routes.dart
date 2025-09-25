@@ -19,5 +19,6 @@ class Routes {
   static const String webView = '/webView';
   static const String customerProductDetails = '/customerProductDetails';
   static const String productsViewAll = '/productsViewAll';
+  static const String customerSearch = '/customerSearch';
   static const String customerSeeAllProducts = '/customerSeeAllProducts';
 }

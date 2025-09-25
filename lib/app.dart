@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/app/app_cubit/app_cubit.dart';
@@ -5,11 +7,13 @@ import 'package:shopi/core/app/app_cubit/app_state.dart';
 import 'package:shopi/core/app/upload_image_cubit/upload_image_cubit.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/di/di.dart';
+import 'package:shopi/core/di/di.dart' as NavigatorService;
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/langs/app_localizations_setup.dart';
 import 'package:shopi/core/routes/app_route.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopi/core/services/dynamic_links/dynamic_links_services.dart';
 import 'package:shopi/core/style/themes/app_theme.dart';
 
 class Shopi extends StatelessWidget {
@@ -40,6 +44,7 @@ class Shopi extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<AppCubit>();
               return MaterialApp(
+                navigatorKey: NavigatorService.navigatorKey,
                 localizationsDelegates:
                     AppLocalizationsSetup.localizationsDelegates,
                 supportedLocales: AppLocalizationsSetup.supportedLocales,
@@ -47,13 +52,45 @@ class Shopi extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: cubit.isDark ? themeLight() : themeDark(),
                 onGenerateRoute: AppRouter.onGenerateRoute,
+                onUnknownRoute: (settings) {
+                  log("❌ Unknown route: ${settings.name}");
+
+                  // ✅ عشان أي link خام زي https://shopi.com/product?id=29 مايكسرش
+                  return AppRouter.errorRoute(settings);
+                },
                 // ignore: unnecessary_null_comparison
                 initialRoute: token.isEmpty || token == "" || token == null
                     ? Routes.splash
                     : role == 'admin'
                     ? Routes.adminHome
                     : Routes.customerMain,
+                builder: (context, child) {
+                  getIt<DeepLinkService>()
+                      .init(); // ✅ هو اللي هيوديك على صفحة الـ product
+                  return child!;
+                },
               );
+
+              //  MaterialApp(
+              //   localizationsDelegates:
+              //       AppLocalizationsSetup.localizationsDelegates,
+              //   supportedLocales: AppLocalizationsSetup.supportedLocales,
+              //   locale: Locale(cubit.currentLang),
+              //   debugShowCheckedModeBanner: false,
+              //   theme: cubit.isDark ? themeLight() : themeDark(),
+              //   onGenerateRoute: AppRouter.onGenerateRoute,
+              //   // ignore: unnecessary_null_comparison
+              //   initialRoute: token.isEmpty || token == "" || token == null
+              //       ? Routes.splash
+              //       : role == 'admin'
+              //       ? Routes.adminHome
+              //       : Routes.customerMain,
+              //   builder: (context, child) {
+              //     /// ✅ استدعاء deep link service بعد ما يبقى عندنا context
+              //     getIt<DeepLinkService>().init(context);
+              //     return child!;
+              //   },
+              // );
             },
           );
         },

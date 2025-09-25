@@ -35,7 +35,7 @@ class CustomerCategoryItem extends StatelessWidget {
             height: 80.h,
             width: 80.w,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(20.r),
               child: CachedNetworkImage(
                 imageUrl: image,
                 fit: BoxFit.contain,

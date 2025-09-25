@@ -8,9 +8,10 @@ import 'package:shopi/core/widgets/custom_linear_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({required this.title, super.key});
+  const CustomAppBar({required this.title, super.key, this.onPressed});
 
   final String title;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomLinearButton(
-            onPressed: () {
-              context.pop();
-            },
+            onPressed:
+                onPressed ??
+                () {
+                  context.pop();
+                },
             child: Center(child: SvgPicture.asset(AppImages.backButton)),
           ),
           Flexible(

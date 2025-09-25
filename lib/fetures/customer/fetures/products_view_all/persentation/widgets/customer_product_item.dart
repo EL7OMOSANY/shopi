@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopi/core/app/share_cubit/share_cubit.dart';
 import 'package:shopi/core/constants/app_spacer.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
@@ -8,9 +10,9 @@ import 'package:shopi/core/extensions/string_extentions.dart';
 import 'package:shopi/core/routes/routes.dart';
 import 'package:shopi/core/widgets/custom_container_linear_customer.dart';
 import 'package:shopi/core/widgets/custom_favorite_button.dart';
-// import 'package:shopi/core/widgets/custom_favorite_button.dart';
-// import 'package:shopi/core/widgets/custom_share_button.dart';
 import 'package:shopi/core/widgets/text_app.dart';
+import 'package:shopi/fetures/admin/fetures/products/data/models/get_all_products_response.dart';
+import 'package:shopi/fetures/customer/fetures/favorits/presentation/cubit/customer_favorites_cubit.dart';
 
 class CustomerProductItem extends StatelessWidget {
   const CustomerProductItem({
@@ -44,73 +46,72 @@ class CustomerProductItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //  //   Share Button
-                //     BlocBuilder<ShareCubit, ShareState>(
-                //       builder: (context, state) {
-                //         return state.when(
-                //           initial: () {
-                //             return CustomShareButton(
-                //               size: 25,
-                //               onTap: () {
-                //                 // context.read<ShareCubit>().sendDynamicLinkProduct(
-                //                 //   imageUrl: imageUrl,
-                //                 //   productId: productId,
-                //                 //   title: title,
-                //                 // );
-                //               },
-                //             );
-                //           },
-                //           loading: (id) {
-                //             if (id == productId) {
-                //               return Padding(
-                //                 padding: EdgeInsets.only(left: 10.w),
-                //                 child: SizedBox(
-                //                   height: 25.h,
-                //                   width: 25.w,
-                //                   child: CircularProgressIndicator(
-                //                     color: context.color.bluePinkLight,
-                //                   ),
-                //                 ),
-                //               );
-                //             }
-                //             return CustomShareButton(size: 25, onTap: () {});
-                //           },
-                //           success: () {
-                //             return CustomShareButton(
-                //               size: 25,
-                //               onTap: () {
-                //                 // context.read<ShareCubit>().sendDynamicLinkProduct(
-                //                 //   imageUrl: imageUrl,
-                //                 //   productId: productId,
-                //                 //   title: title,
-                //                 // );
-                //               },
-                //             );
-                //           },
-                //         );
-                //       },
-                //     ),
-                //   Favorite Button
-                // BlocBuilder<FavoritesCubit, FavoritesState>(
-                //   builder: (context, state) {
-                //     return
-                CustomFavoriteButton(
-                  size: 25,
-                  isFavorites: true,
-                  // context.read<FavoritesCubit>().isFavorites(
-                  //   productId.toString(),
-                  // ),
-                  onTap: () async {
-                    // await context.read<FavoritesCubit>().manageFavourites(
-                    //   productId: productId.toString(),
-                    //   title: title,
-                    //   image: imageUrl,
-                    //   price: price.toString(),
-                    //   categoryName: categoryName,
-                    // );
+                // // Share Button
+                BlocListener<ShareCubit, ShareState>(
+                  listener: (context, state) {
+                    if (state is ShareError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error: ${state.message}")),
+                      );
+                    } else if (state is ShareSuccess) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Shared successfully!")),
+                      );
+                    }
                   },
-                  //   );
-                  // },
+                  child: BlocBuilder<ShareCubit, ShareState>(
+                    builder: (context, state) {
+                      if (state is ShareLoading &&
+                          state.productId == productId) {
+                        return SizedBox(
+                          height: 25,
+                          width: 25,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: context.color.bluePinkLight,
+                          ),
+                        );
+                      }
+                      return IconButton(
+                        icon: const Icon(Icons.share, size: 22),
+                        onPressed: () {
+                          context.read<ShareCubit>().shareProduct(
+                            title: title,
+                            productId: productId,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+
+                // Favorite Button
+                BlocBuilder<CustomerFavoritesCubit, CustomerFavoritesState>(
+                  builder: (context, state) {
+                    final favoritesCubit = context
+                        .read<CustomerFavoritesCubit>();
+                    return CustomFavoriteButton(
+                      size: 25,
+                      isFavorites: favoritesCubit.isFavorites(
+                        productId.toString(),
+                      ),
+                      onTap: () {
+                        favoritesCubit.manageFavourites(
+                          ProductModel(
+                            id: productId.toString(),
+                            title: title,
+                            price: price,
+                            images: [imageUrl],
+                            category: ProductCategoryData(
+                              id: '',
+                              name: categoryName,
+                            ),
+                            description: '',
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
@@ -149,15 +150,19 @@ class CustomerProductItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: TextApp(
-                    text: categoryName,
-                    style: AppTextStyles.text12w700.copyWith(
-                      color: context.color.textColor!.withOpacity(.7),
+                  child: SizedBox(
+                    width: 75.w,
+                    child: TextApp(
+                      text: categoryName,
+                      style: AppTextStyles.text12w700.copyWith(
+                        color: context.color.textColor!.withOpacity(.7),
+                      ),
+                      maxLines: 1,
+                      textOverflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
                     ),
-                    maxLines: 1,
                   ),
                 ),
-                SizedBox(height: 5.h),
 
                 // Price
                 Padding(

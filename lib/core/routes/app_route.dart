@@ -15,14 +15,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopi/fetures/auth/signup/presentation/logic/cubit/signup_cubit.dart';
 import 'package:shopi/fetures/auth/signup/presentation/screen/signup_screen.dart';
-import 'package:shopi/fetures/customer/fetures/categories/presentation/screen/customer_categories_screen.dart';
-import 'package:shopi/fetures/customer/fetures/favorits/presentation/screen/customer_favorits_screen.dart';
+import 'package:shopi/fetures/customer/fetures/categories/presentation/screen/customer_categories_screen_by_id.dart';
+import 'package:shopi/fetures/customer/fetures/favorits/presentation/screen/customer_favorites_screen.dart';
 import 'package:shopi/fetures/customer/fetures/home/presentation/screen/customer_home_screen.dart';
 import 'package:shopi/fetures/customer/fetures/notifications/presentation/screen/customer_notifications_screen.dart';
 import 'package:shopi/fetures/customer/fetures/product_details/presentation/screen/customer_product_details_screen.dart';
 import 'package:shopi/fetures/customer/fetures/products_view_all/persentation/screen/products_view_all_screen.dart';
 import 'package:shopi/fetures/customer/fetures/products_view_all/persentation/widgets/see_all_products.dart';
 import 'package:shopi/fetures/customer/fetures/profile/presentation/screen/customer_profile_screen.dart';
+import 'package:shopi/fetures/customer/fetures/search/presentation/screen/search_screen.dart';
 import 'package:shopi/fetures/customer/main/presentation/screen/main_screen.dart';
 
 import 'package:shopi/splash_screen.dart';
@@ -69,7 +70,7 @@ class AppRouter {
         );
       case Routes.customerCategories:
         return CupertinoPageRoute(
-          builder: (_) => CustomerCategoriesScreen(
+          builder: (_) => CustomerCategoriesScreenById(
             categoryInfo: args! as ({int categoryId, String categoryName}),
           ),
           settings: settings,
@@ -77,6 +78,11 @@ class AppRouter {
       case Routes.customerFavorits:
         return CupertinoPageRoute(
           builder: (_) => const CustomerFavoritsScreen(),
+          settings: settings,
+        );
+      case Routes.customerSearch:
+        return CupertinoPageRoute(
+          builder: (_) => const CustomerSearchScreen(),
           settings: settings,
         );
       case Routes.customerProductDetails:
@@ -149,7 +155,7 @@ class AppRouter {
         );
 
       default:
-        return _errorRoute(settings);
+        return errorRoute(settings);
     }
   }
 
@@ -160,7 +166,7 @@ class AppRouter {
     return [onGenerateRoute(RouteSettings(name: initialRoute))];
   }
 
-  static Route<dynamic> _errorRoute(RouteSettings settings) {
+  static Route<dynamic> errorRoute(RouteSettings settings) {
     return CupertinoPageRoute(
       builder: (_) => Scaffold(
         body: Center(

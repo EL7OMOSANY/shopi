@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopi/core/di/di.dart';
@@ -7,6 +8,7 @@ import 'package:shopi/core/widgets/custom_back_ground_paint.dart';
 import 'package:shopi/fetures/customer/fetures/product_details/presentation/cubit/customer_product_details_cubit.dart';
 import 'package:shopi/fetures/customer/fetures/product_details/presentation/widgets/add_to_cart_button.dart';
 import 'package:shopi/fetures/customer/fetures/product_details/presentation/widgets/product_details_body.dart';
+import 'package:shopi/fetures/customer/main/presentation/screen/main_screen.dart';
 
 class CustomerProductDetailsScreen extends StatelessWidget {
   const CustomerProductDetailsScreen({required this.productId, super.key});
@@ -34,7 +36,17 @@ class CustomerProductDetailsScreen extends StatelessWidget {
                 );
               } else if (state is CustomerProductDetailsSuccess) {
                 return Scaffold(
-                  appBar: CustomAppBar(title: cubit.productDetailsModel.title!),
+                  appBar: CustomAppBar(
+                    title: cubit.productDetailsModel.title!,
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => CustomerMainScreen(),
+                        ),
+                      );
+                    },
+                  ),
                   bottomNavigationBar: AddToCartButton(
                     price: cubit.productDetailsModel.price!,
                   ),

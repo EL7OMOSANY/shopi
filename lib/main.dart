@@ -30,7 +30,6 @@ Future<void> main() async {
 
   // initialize firebase
   await Firebase.initializeApp();
-  await Firebase.initializeApp();
 
   // firebase cloud messaging for specific users (admins or customers)
   String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
@@ -44,6 +43,7 @@ Future<void> main() async {
   await LocalNotificationService.init();
 
   // initialize hive
-  HiveDatabase().setup();
+  await HiveDatabase().setup();
+
   runApp(const Shopi());
 }

@@ -41,4 +41,5 @@ class LangKeys {
   static const String plsSignIn = 'pls_sign_in';
   static const String notifications = 'notifications';
   static const String viewAll = 'view_all';
+  static const String categories = 'categories';
 }

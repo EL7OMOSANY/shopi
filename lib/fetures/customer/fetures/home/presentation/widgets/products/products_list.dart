@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shopi/fetures/admin/fetures/products/data/models/get_all_products_response.dart';
 import 'package:shopi/fetures/customer/fetures/products_view_all/persentation/widgets/customer_product_item.dart';
 
@@ -24,12 +25,20 @@ class ProductsList extends StatelessWidget {
           childAspectRatio: 165 / 250,
         ),
         itemBuilder: (context, index) {
-          return CustomerProductItem(
-            price: productList[index].price ?? 0,
-            categoryName: productList[index].category!.name ?? '',
-            title: productList[index].title ?? '',
-            imageUrl: productList[index].images!.first,
-            productId: int.parse(productList[index].id ?? '0'),
+          return AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 500),
+            child: ScaleAnimation(
+              child: FadeInAnimation(
+                child: CustomerProductItem(
+                  price: productList[index].price ?? 0,
+                  categoryName: productList[index].category!.name ?? '',
+                  title: productList[index].title ?? '',
+                  imageUrl: productList[index].images!.first,
+                  productId: int.parse(productList[index].id ?? '0'),
+                ),
+              ),
+            ),
           );
         },
       ),

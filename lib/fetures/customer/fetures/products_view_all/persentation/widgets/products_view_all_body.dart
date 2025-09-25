@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shopi/core/constants/app_text_styles.dart';
 import 'package:shopi/core/extensions/context_ext.dart';
 import 'package:shopi/core/widgets/animated_up_button.dart';
@@ -43,26 +44,6 @@ class _ProductsViewAllBodyState extends State<ProductsViewAllBody> {
               children: [
                 Column(
                   children: [
-                    //view all button
-                    // Align(
-                    //   alignment: Alignment.centerRight,
-                    //   child: InkWell(
-                    //     onTap: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         CupertinoPageRoute(
-                    //           builder: (context) =>
-                    //               const SeeAllCustomerProducts(),
-                    //         ),
-                    //       );
-                    //     },
-                    //     child: Text(
-                    //       context.tr('See All Products'),
-                    //       style: AppTextStyles.text16w500,
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(height: 10.h),
                     Expanded(
                       child: GridView.builder(
                         shrinkWrap: true,
@@ -79,14 +60,27 @@ class _ProductsViewAllBodyState extends State<ProductsViewAllBody> {
                               childAspectRatio: 165 / 250,
                             ),
                         itemBuilder: (context, index) {
-                          return CustomerProductItem(
-                            price: cubit.productsList[index].price ?? 0,
-                            categoryName:
-                                cubit.productsList[index].category!.name ?? '',
-                            title: cubit.productsList[index].title ?? '',
-                            imageUrl: cubit.productsList[index].images!.first,
-                            productId: int.parse(
-                              cubit.productsList[index].id ?? '0',
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 500),
+                            child: ScaleAnimation(
+                              child: FadeInAnimation(
+                                child: CustomerProductItem(
+                                  price: cubit.productsList[index].price ?? 0,
+                                  categoryName:
+                                      cubit
+                                          .productsList[index]
+                                          .category!
+                                          .name ??
+                                      '',
+                                  title: cubit.productsList[index].title ?? '',
+                                  imageUrl:
+                                      cubit.productsList[index].images!.first,
+                                  productId: int.parse(
+                                    cubit.productsList[index].id ?? '0',
+                                  ),
+                                ),
+                              ),
                             ),
                           );
                         },

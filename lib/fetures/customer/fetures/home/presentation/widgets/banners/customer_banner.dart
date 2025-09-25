@@ -30,7 +30,7 @@ class CustomerBanner extends StatelessWidget {
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: Text(
-                    "something went wrong or no banners",
+                    "There is no Banners ,Keep tuning...",
                     style: AppTextStyles.text16w500.copyWith(
                       color: context.color.textColor,
                     ),
