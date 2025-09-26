@@ -32,11 +32,13 @@ class CustomButtomSheet {
                 top: Radius.circular(24),
               ),
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.8),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
+                  // ignore: deprecated_member_use
                   color: Colors.white.withOpacity(0.1),
                   blurRadius: 12,
                   spreadRadius: 2,

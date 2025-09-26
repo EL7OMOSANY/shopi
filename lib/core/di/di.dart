@@ -86,6 +86,9 @@ Future<void> initApp() async {
   getIt.registerFactory<AppCubit>(() => AppCubit());
   log("✅ AppCubit registered");
 
+  getIt.registerSingleton<GlobalKey<NavigatorState>>(navigatorKey);
+  log("✅ GlobalKey<NavigatorState> registered");
+
   getIt.registerFactory<UploadImageCubit>(() => UploadImageCubit(getIt()));
 
   log("✅ UploadImageCubit registered");

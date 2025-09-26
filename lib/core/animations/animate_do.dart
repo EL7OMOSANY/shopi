@@ -56,7 +56,6 @@ class CustomFadeInLeft extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: sharePreferences
     return FadeInLeft(
       delay: const Duration(milliseconds: 300),
       duration: Duration(milliseconds: duration),
@@ -89,7 +88,6 @@ class CustomFadeInRight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: sharePreferences
     return FadeInRight(
       delay: const Duration(milliseconds: 300),
       duration: Duration(milliseconds: duration),

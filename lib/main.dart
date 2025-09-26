@@ -29,16 +29,21 @@ Future<void> main() async {
   await FlutterLocalization.instance.ensureInitialized();
 
   // initialize firebase
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
 
-  // firebase cloud messaging for specific users (admins or customers)
-  String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
+  ).whenComplete(() {
+    FirebaseMessagingHandler.init();
+    LocalNotificationService.init();
+  });
 
-  if (role == "customer") {
-    await FirebaseMessaging.instance.subscribeToTopic("customers");
-  } else if (role == "admin") {
-    await FirebaseMessaging.instance.subscribeToTopic("admins");
-  }
+  // // firebase cloud messaging for specific users (admins or customers)
+  // String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
+
+  // if (role == "customer") {
+  //   // await FirebaseMessaging.instance.subscribeToTopic("customers");
+  // } else if (role == "admin") {
+  //   await FirebaseMessaging.instance.subscribeToTopic("customers");
+  // }
   await FirebaseMessagingHandler.init();
   await LocalNotificationService.init();
 

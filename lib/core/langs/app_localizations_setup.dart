@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shopi/core/langs/app_localization.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 

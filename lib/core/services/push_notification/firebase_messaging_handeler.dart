@@ -1,8 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:shopi/core/di/di.dart';
-import 'package:shopi/core/services/push_notification/local_notfication_service.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-
 // class FirebaseMessagingHandler {
 //   static final FirebaseMessaging _firebaseMessaging =
 //       FirebaseMessaging.instance;
@@ -85,6 +80,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //   }
 // }
 
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:shopi/core/constants/shared_pref_keys.dart';
+import 'package:shopi/core/di/di.dart';
+import 'package:shopi/core/helpers/shared_pref_helper.dart';
+import 'package:shopi/core/routes/routes.dart';
+import 'package:shopi/core/services/push_notification/local_notfication_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 class FirebaseMessagingHandler {
   static final FirebaseMessaging _firebaseMessaging =
       FirebaseMessaging.instance;
@@ -105,7 +110,7 @@ class FirebaseMessagingHandler {
         LocalNotificationService.showNotification(
           title: notification.title ?? '',
           body: notification.body ?? '',
-          payload: message.data['productId'] ?? '',
+          payload: message.data['productId'].toString(),
         );
       }
     });
@@ -124,12 +129,19 @@ class FirebaseMessagingHandler {
   }
 
   static void _handleNavigation(RemoteMessage message) {
-    final productId = message.data['productId'];
-    if (productId != null) {
+    // ignore: unnecessary_nullable_for_final_variable_declarations
+    final int? productId = int.parse(message.data['productId'].toString())
+    // message.data['productId']
+    ;
+    log(productId.toString());
+
+    if (productId != null && productId != -1) {
       getIt<GlobalKey<NavigatorState>>().currentState?.pushNamed(
-        '/productDetails',
+        Routes.customerProductDetails,
         arguments: productId,
       );
+    } else {
+      return;
     }
   }
 
@@ -148,11 +160,31 @@ class FirebaseMessagingHandler {
   }
 
   /// Subscribe
+  // static Future<void> subscribeNotification() async {
+  //   isNotificationSubscribe.value = true;
+  //   await _firebaseMessaging.subscribeToTopic("shopi-users");
+  //   debugPrint('====🔔 Notification Subscribed 🔔=====');
+  // }
+  // ...
+
   static Future<void> subscribeNotification() async {
     isNotificationSubscribe.value = true;
-    await _firebaseMessaging.subscribeToTopic("shopi-users");
-    debugPrint('====🔔 Notification Subscribed 🔔=====');
+
+    final String role = SharedPref().getString(SharedPrefKeys.userRole) ?? '';
+    String topicToSubscribe = 'shopi-users'; // Topic عام كافتراضي
+
+    if (role == 'customer') {
+      topicToSubscribe = 'customers'; // Topic للعملاء فقط
+    } else if (role == 'admin') {
+      topicToSubscribe = 'admins'; // Topic للمشرفين فقط
+    }
+
+    await _firebaseMessaging.subscribeToTopic(topicToSubscribe);
+    debugPrint('====🔔 Notification Subscribed to $topicToSubscribe 🔔=====');
   }
+
+  // تأكد من أن دالة الإرسال في الـ Cubit ترسل إلى الـ Topic الصحيح
+  // (مثلاً: shopi-customers إذا كانت الإشعارات مخصصة للعملاء)
 
   /// Unsubscribe
   static Future<void> unSubscribeNotification() async {

@@ -35,11 +35,13 @@ class CustomContainerLinearAdmin extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: ColorsDark.black1.withOpacity(0.3),
             offset: const Offset(0, 4),
             blurRadius: 8,
           ),
           BoxShadow(
+            // ignore: deprecated_member_use
             color: ColorsDark.black2.withOpacity(0.3),
             offset: const Offset(0, 4),
             blurRadius: 2,

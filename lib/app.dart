@@ -7,6 +7,7 @@ import 'package:shopi/core/app/app_cubit/app_state.dart';
 import 'package:shopi/core/app/upload_image_cubit/upload_image_cubit.dart';
 import 'package:shopi/core/constants/shared_pref_keys.dart';
 import 'package:shopi/core/di/di.dart';
+// ignore: library_prefixes
 import 'package:shopi/core/di/di.dart' as NavigatorService;
 import 'package:shopi/core/helpers/shared_pref_helper.dart';
 import 'package:shopi/core/langs/app_localizations_setup.dart';

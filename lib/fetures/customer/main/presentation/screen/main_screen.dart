@@ -15,6 +15,7 @@ import 'package:shopi/fetures/customer/main/presentation/widgets/main_customer_a
 class CustomerMainScreen extends StatelessWidget {
   const CustomerMainScreen({super.key});
 
+  // @override
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
